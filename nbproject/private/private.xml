@@ -5,10 +5,13 @@
         <group>
             <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/mysql/MySQL.java</file>
             <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/dao/LoginDao.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/ui/UIRegister.java</file>
             <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/Main.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/ui/UIInicio.java</file>
             <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/api/API.java</file>
             <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/ui/UILogin.java</file>
             <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/ui/UIRanking.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/ui/UIInicioADM.java</file>
             <file>file:/C:/Users/rafae/OneDrive/Documentos/NetBeansProjects/PIProject/src/piproject/api/fundo_login.png</file>
         </group>
     </open-files>
