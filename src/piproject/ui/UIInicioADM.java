@@ -4,6 +4,10 @@
  */
 package piproject.ui;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import piproject.mysql.MySQL;
+
 /**
  * @author rafae
  */
@@ -29,7 +33,7 @@ public class UIInicioADM extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        disconnectButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -56,9 +60,14 @@ public class UIInicioADM extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Ranking");
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 51));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton3.setText("Desconectar");
+        disconnectButton.setBackground(new java.awt.Color(255, 0, 51));
+        disconnectButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        disconnectButton.setText("Desconectar");
+        disconnectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disconnectButtonActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Usuários online:");
@@ -93,7 +102,7 @@ public class UIInicioADM extends javax.swing.JFrame {
                         .addComponent(inicioLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton3)))
+                        .addComponent(disconnectButton)))
                 .addContainerGap(146, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -123,7 +132,7 @@ public class UIInicioADM extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(disconnectButton)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -142,9 +151,24 @@ public class UIInicioADM extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        inicioLabel.setText("ADM - " + UILogin.userTextField.getText());
+        inicioLabel.setText("ADM - " + nome);
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowOpened
+
+    private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            Connection con = MySQL.getConnection();
+            String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'false' where `userName`= '" + nome + "'";
+            PreparedStatement pstmt = con.prepareStatement(updateStatus);
+            pstmt.executeQuery();
+            UILogin frame = new UILogin();
+            frame.setVisible(true);
+            this.setVisible(false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_disconnectButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,13 +207,13 @@ public class UIInicioADM extends javax.swing.JFrame {
             }
         });
     }
-
+    private String nome = UILogin.userTextField.getText();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton disconnectButton;
     private javax.swing.JLabel fundo;
     public javax.swing.JLabel inicioLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -112,7 +112,7 @@ public class UILogin extends javax.swing.JFrame {
                         if (rs.getNString("userPassword") == null ? userPasswordField.getText() == null : rs.getNString("userPassword").equals(userPasswordField.getText())) {
                             if (rs.getNString("userStatus").equals("false")) {
                                 String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'true' where `userName`= '" + userTextField.getText() + "'";
-                                if (rs.getNString("userPermissions").equals("user")) {
+                                if (rs.getNString("userPermission").equals("user")) {
                                     JOptionPane.showMessageDialog(null, "Conectando!!!");
                                     UIInicio frame = new UIInicio();
                                     frame.setVisible(true);
@@ -124,7 +124,7 @@ public class UILogin extends javax.swing.JFrame {
                                     stmt.close();
                                     rs.close();
                                     pstmt.close();
-                                } else if(rs.getNString("userPermissions").equals("admin")) {
+                                } else if(rs.getNString("userPermission").equals("admin")) {
                                     JOptionPane.showMessageDialog(null, "Conectando!!!");
                                     UIInicioADM frame = new UIInicioADM();
                                     frame.setVisible(true);

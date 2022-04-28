@@ -100,8 +100,6 @@ public class UIRegister extends javax.swing.JFrame {
                 if (rs.next() == false) {
                     PreparedStatement insertUser = con.prepareStatement("INSERT INTO `piproject`.`user_informations` (`userName`, `userPassword`) VALUES ('" + userTextField.getText() + "', '" + userPasswordField.getText() + "');");
                     insertUser.execute();
-                    PreparedStatement insertRanking = con.prepareStatement("INSERT INTO `piproject`.`ranking_informations` (`userPoints`) VALUES (0);");
-                    insertRanking.execute();
                     JOptionPane.showMessageDialog(null, "Usuário criado com sucesso. Conecte-se!");
 
                     UILogin frame = new UILogin();

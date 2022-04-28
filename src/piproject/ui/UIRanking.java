@@ -135,8 +135,8 @@ public class UIRanking extends javax.swing.JFrame {
 
             Connection con = MySQL.getConnection();
             Statement stmt = con.createStatement();
-            String SQLPointsTOP1 = "SELECT max(userPoints) as max_userPoints from `piproject`.`user_informations`";
-            String SQLUserTOP1 = "SELECT userName FROM `piproject`.`user_informations` WHERE max(userPoints)";
+            String SQLPointsTOP1 = "SELECT max(userPoints) as max_userPoints from `user_informations`";
+            String SQLUserTOP1 = "SELECT `userName`, FROM `piproject`.`user_informations` WHERE max(userPoints)";
             ResultSet rs = stmt.executeQuery(SQLPointsTOP1);
             ResultSet rs1 = stmt.executeQuery(SQLUserTOP1);
             if (rs.next()) {
