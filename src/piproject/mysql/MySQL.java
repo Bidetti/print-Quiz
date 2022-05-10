@@ -6,10 +6,7 @@ package piproject.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Scanner;
-import piproject.ui.UILogin;
 
 /**
  *
@@ -28,7 +25,7 @@ public class MySQL {
     
     public static Connection getConnection() throws Exception{
         try {
-            Class.forName(DRIVER);
+            //Class.forName(DRIVER);
             
             Connection conn  = DriverManager.getConnection(URL, USER, PASSWORD);
             //System.out.println("Connected");

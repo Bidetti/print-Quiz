@@ -161,10 +161,12 @@ public class UIInicioADM extends javax.swing.JFrame {
             Connection con = MySQL.getConnection();
             String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'false' where `userName`= '" + nome + "'";
             PreparedStatement pstmt = con.prepareStatement(updateStatus);
-            pstmt.executeQuery();
             UILogin frame = new UILogin();
+            pstmt.executeUpdate();
             frame.setVisible(true);
             this.setVisible(false);
+            pstmt.close();
+            con.close();
         } catch (Exception e) {
             System.out.println(e);
         }

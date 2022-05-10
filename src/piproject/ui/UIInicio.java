@@ -7,7 +7,6 @@ package piproject.ui;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import piproject.mysql.MySQL;
-import static piproject.ui.UILogin.userTextField;
 
 /**
  * @author rafae
@@ -204,9 +203,11 @@ public class UIInicio extends javax.swing.JFrame {
             String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'false' where `userName`= '" + nome + "'";
             PreparedStatement pstmt = con.prepareStatement(updateStatus);
             UILogin frame = new UILogin();
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
             frame.setVisible(true);
             this.setVisible(false);
+            pstmt.close();
+            con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
