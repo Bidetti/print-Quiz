@@ -4,11 +4,11 @@
  */
 package piproject.ui;
 
+import piproject.mysql.MySQL;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
-import piproject.mysql.MySQL;
 
 
 /**
@@ -36,6 +36,14 @@ public class UIRanking extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         top1 = new javax.swing.JLabel();
+        top2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        top3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        top4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        top5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ranking");
@@ -43,6 +51,7 @@ public class UIRanking extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
+
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -62,36 +71,89 @@ public class UIRanking extends javax.swing.JFrame {
 
         top1.setText("Erro ao carregar usuário...");
 
+        top2.setText("Erro ao carregar usuário...");
+
+        jLabel3.setText("2.");
+
+        jLabel4.setText("3.");
+
+        top3.setText("Erro ao carregar usuário...");
+
+        jLabel5.setText("4.");
+
+        top4.setText("Erro ao carregar usuário...");
+
+        jLabel6.setText("5.");
+
+        top5.setText("Erro ao carregar usuário...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(293, 293, 293))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(top1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(201, 201, 201))))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(119, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGap(293, 293, 293))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel6)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(top5, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                        .addComponent(jLabel5)
+                                                                        .addGap(18, 18, 18)
+                                                                        .addComponent(top4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(jLabel4)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(top3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                        .addComponent(jLabel3)
+                                                                                        .addGap(18, 18, 18)
+                                                                                        .addComponent(top2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                        .addComponent(jLabel2)
+                                                                                        .addGap(18, 18, 18)
+                                                                                        .addComponent(top1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addGap(201, 201, 201))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(top1))
-                .addGap(310, 310, 310)
-                .addComponent(backButton)
-                .addGap(50, 50, 50))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel1)
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(top1))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(top2)
+                                        .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(top3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel5)
+                                        .addComponent(top4))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel6)
+                                        .addComponent(top5))
+                                .addGap(174, 174, 174)
+                                .addComponent(backButton)
+                                .addGap(50, 50, 50))
         );
 
         pack();
@@ -99,19 +161,25 @@ public class UIRanking extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        String verifyStatus = "SELECT `userStatus` FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
+        String SQLBack = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
         try {
             Connection con = MySQL.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rsupdate = stmt.executeQuery(verifyStatus);
-            if (rsupdate.next()) {
-                if (rsupdate.getNString("userStatus").equals("false")) {
-                    UILogin frame = new UILogin();
-                    frame.setVisible(true);
-                    this.setVisible(false);
+            ResultSet rs = stmt.executeQuery(SQLBack);
+            if (rs.next()) {
+                if (rs.getNString("userStatus").equals("true")) {
+                    if (rs.getNString("userPermission").equals("user")) {
+                        UIInicio frameuser = new UIInicio();
+                        frameuser.setVisible(true);
+                        this.setVisible(false);
+                    } else if (rs.getNString("userPermission").equals("admin")) {
+                        UIInicioADM frameadmin = new UIInicioADM();
+                        frameadmin.setVisible(true);
+                        this.setVisible(false);
+                    }
                 } else {
-                    UIInicio frame1 = new UIInicio();
-                    frame1.setVisible(true);
+                    UILogin framelogin = new UILogin();
+                    framelogin.setVisible(true);
                     this.setVisible(false);
                 }
             }
@@ -133,19 +201,13 @@ public class UIRanking extends javax.swing.JFrame {
 
             Connection con = MySQL.getConnection();
             Statement stmt = con.createStatement();
-            String SQLPointsTOP1 = "SELECT max(userPoints) as max_userPoints from `user_informations`";
-            String SQLUserTOP1 = "SELECT `userName`, FROM `piproject`.`user_informations` WHERE max(userPoints)";
-            ResultSet rs = stmt.executeQuery(SQLPointsTOP1);
-            ResultSet rs1 = stmt.executeQuery(SQLUserTOP1);
+            String SQLTOP1 = "SELECT userName,userPoints from `user_informations` where userPoints order by userPoints desc limit 5;";
+            ResultSet rs = stmt.executeQuery(SQLTOP1);
             if (rs.next()) {
-                if (rs1.next()) {
-                    int pontos_1 = rs.getInt("max_userPoints");
-                    top1.setText(rs1.getNString("userName") + " - " + pontos_1 + " pontos");
-                    System.out.println(rs.getString("max_userPoints"));
-
-                    rs1.close();
-                    rs.close();
-                }
+                top1.setText(rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos");
+                top2.setText(rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos");
+                System.out.print("Foi");
+                rs.close();
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -191,6 +253,14 @@ public class UIRanking extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     public javax.swing.JLabel top1;
+    public javax.swing.JLabel top2;
+    public javax.swing.JLabel top3;
+    public javax.swing.JLabel top4;
+    public javax.swing.JLabel top5;
     // End of variables declaration//GEN-END:variables
 }

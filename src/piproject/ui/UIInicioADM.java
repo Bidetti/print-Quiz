@@ -4,9 +4,10 @@
  */
 package piproject.ui;
 
+import piproject.mysql.MySQL;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import piproject.mysql.MySQL;
 
 /**
  * @author rafae
@@ -30,14 +31,15 @@ public class UIInicioADM extends javax.swing.JFrame {
     private void initComponents() {
 
         inicioLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
+        rankingButton = new javax.swing.JButton();
         disconnectButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        fundo = new javax.swing.JLabel();
+        userOnTitle = new javax.swing.JLabel();
+        usersTitle = new javax.swing.JLabel();
+        mediaTitle = new javax.swing.JLabel();
+        usersOnInfo = new javax.swing.JLabel();
+        usersInfo = new javax.swing.JLabel();
+        mediaInfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -49,16 +51,18 @@ public class UIInicioADM extends javax.swing.JFrame {
         inicioLabel.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 30)); // NOI18N
         inicioLabel.setText("ÍNICIO - ADM");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setText("Informações:");
+        searchButton.setBackground(new java.awt.Color(51, 153, 255));
+        searchButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        searchButton.setText("Consultar usuários");
 
-        jButton1.setBackground(new java.awt.Color(51, 153, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Consultar usuários");
-
-        jButton2.setBackground(new java.awt.Color(51, 153, 255));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("Ranking");
+        rankingButton.setBackground(new java.awt.Color(51, 153, 255));
+        rankingButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rankingButton.setText("Ranking");
+        rankingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rankingButtonActionPerformed(evt);
+            }
+        });
 
         disconnectButton.setBackground(new java.awt.Color(255, 0, 51));
         disconnectButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -69,17 +73,20 @@ public class UIInicioADM extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Usuários online:");
+        userOnTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        userOnTitle.setText("Usuários online:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Usuários registrados:");
+        usersTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        usersTitle.setText("Usuários registrados:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Média de acertos:");
+        mediaTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mediaTitle.setText("Média de acertos:");
 
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/fundo_login.png"))); // NOI18N
-        fundo.setText("jLabel2");
+        usersOnInfo.setText("Falha no carregamento...");
+
+        usersInfo.setText("Falha no carregamento...");
+
+        mediaInfo.setText("Falha no carregamento...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,13 +97,16 @@ public class UIInicioADM extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rankingButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(126, 126, 126)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)))
+                            .addComponent(mediaTitle)
+                            .addComponent(userOnTitle)
+                            .addComponent(usersTitle)
+                            .addComponent(usersOnInfo)
+                            .addComponent(usersInfo)
+                            .addComponent(mediaInfo)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(inicioLabel))
@@ -104,16 +114,6 @@ public class UIInicioADM extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(disconnectButton)))
                 .addContainerGap(146, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(360, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addGap(126, 126, 126)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,26 +124,24 @@ public class UIInicioADM extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(userOnTitle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(usersOnInfo))
+                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)
-                        .addComponent(jLabel4)
+                        .addComponent(usersTitle)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                        .addComponent(rankingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(usersInfo)
+                        .addGap(18, 18, 18)
+                        .addComponent(mediaTitle)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mediaInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                 .addComponent(disconnectButton)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(42, 42, 42)
-                    .addComponent(jLabel2)
-                    .addContainerGap(394, Short.MAX_VALUE)))
         );
 
         pack();
@@ -171,6 +169,13 @@ public class UIInicioADM extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_disconnectButtonActionPerformed
+
+    private void rankingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingButtonActionPerformed
+        // TODO add your handling code here:
+        UIRanking frame = new UIRanking();
+        frame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_rankingButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,16 +214,18 @@ public class UIInicioADM extends javax.swing.JFrame {
             }
         });
     }
+
     private String nome = UILogin.userTextField.getText();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton disconnectButton;
-    private javax.swing.JLabel fundo;
     public javax.swing.JLabel inicioLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel mediaInfo;
+    private javax.swing.JLabel mediaTitle;
+    private javax.swing.JButton rankingButton;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JLabel userOnTitle;
+    private javax.swing.JLabel usersInfo;
+    private javax.swing.JLabel usersOnInfo;
+    private javax.swing.JLabel usersTitle;
     // End of variables declaration//GEN-END:variables
 }

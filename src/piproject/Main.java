@@ -9,19 +9,18 @@ import piproject.ui.UILogin;
 
 
 /**
- *
  * @author rafae
  */
-public class Main{
+public class Main {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws Exception{
-        
+    public static void main(String[] args) throws Exception {
+
         UILogin frame = new UILogin();
         frame.setVisible(true);
         MySQL.getConnection();
-   
+
     }
 }

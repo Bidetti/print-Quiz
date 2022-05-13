@@ -4,13 +4,13 @@
  */
 package piproject.ui;
 
+import piproject.mysql.MySQL;
+
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
-
-import piproject.mysql.MySQL;
 
 /**
  * @author rafae
@@ -57,9 +57,19 @@ public class UILogin extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         userTextField.setText("Digite seu usuário aqui...");
+        userTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userTextFieldMouseClicked(evt);
+            }
+        });
         getContentPane().add(userTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 221, -1));
 
         userPasswordField.setText("Senha...");
+        userPasswordField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userPasswordFieldMouseClicked(evt);
+            }
+        });
         getContentPane().add(userPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 220, -1));
 
         startButton.setText("Conectar");
@@ -108,7 +118,7 @@ public class UILogin extends javax.swing.JFrame {
                     String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + userTextField.getText() + "'";
                     ResultSet rs = stmt.executeQuery(SQLUser);
 
-                    if (rs.next() == true) {
+                    if (rs.next()) {
                         if (rs.getNString("userPassword") == null ? userPasswordField.getText() == null : rs.getNString("userPassword").equals(userPasswordField.getText())) {
                             if (rs.getNString("userStatus").equals("false")) {
                                 String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'true' where `userName`= '" + userTextField.getText() + "'";
@@ -124,7 +134,7 @@ public class UILogin extends javax.swing.JFrame {
                                     stmt.close();
                                     rs.close();
                                     pstmt.close();
-                                } else if(rs.getNString("userPermission").equals("admin")) {
+                                } else if (rs.getNString("userPermission").equals("admin")) {
                                     JOptionPane.showMessageDialog(null, "Conectando!!!");
                                     UIInicioADM frame = new UIInicioADM();
                                     frame.setVisible(true);
@@ -136,8 +146,8 @@ public class UILogin extends javax.swing.JFrame {
                                     stmt.close();
                                     rs.close();
                                     pstmt.close();
-                                }else {
-                                    JOptionPane.showMessageDialog(null, "Impossível verificar sua permissão! Contatar um adminisitrador!");
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Impossível verificar sua permissão! Contatar um administrador!");
                                 }
                             } else {
                                 JOptionPane.showMessageDialog(null, "O usuário já esta logado!");
@@ -172,6 +182,16 @@ public class UILogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowActivated
+
+    private void userPasswordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userPasswordFieldMouseClicked
+        // TODO add your handling code here:
+        userPasswordField.setText("");
+    }//GEN-LAST:event_userPasswordFieldMouseClicked
+
+    private void userTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTextFieldMouseClicked
+        // TODO add your handling code here:
+        userTextField.setText("");
+    }//GEN-LAST:event_userTextFieldMouseClicked
 
     /**
      * @param args the command line arguments

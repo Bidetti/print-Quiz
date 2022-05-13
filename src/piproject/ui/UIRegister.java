@@ -4,13 +4,13 @@
  */
 package piproject.ui;
 
+import piproject.mysql.MySQL;
+
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
-
-import piproject.mysql.MySQL;
 
 /**
  * @author rafae
@@ -55,9 +55,19 @@ public class UIRegister extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         userTextField.setText("Crie seu usuário aqui...");
+        userTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userTextFieldMouseClicked(evt);
+            }
+        });
         getContentPane().add(userTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 221, -1));
 
         userPasswordField.setText("Senha...");
+        userPasswordField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userPasswordFieldMouseClicked(evt);
+            }
+        });
         getContentPane().add(userPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 220, -1));
 
         createButton.setText("Criar");
@@ -136,6 +146,16 @@ public class UIRegister extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowOpened
+
+    private void userTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTextFieldMouseClicked
+        // TODO add your handling code here:
+        userTextField.setText("");
+    }//GEN-LAST:event_userTextFieldMouseClicked
+
+    private void userPasswordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userPasswordFieldMouseClicked
+        // TODO add your handling code here:
+        userPasswordField.setText("");
+    }//GEN-LAST:event_userPasswordFieldMouseClicked
 
     /**
      * @param args the command line arguments
