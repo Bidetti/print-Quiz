@@ -162,8 +162,7 @@ public class UIRanking extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         String SQLBack = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
-        try {
-            Connection con = MySQL.getConnection();
+        try (Connection con = MySQL.getConnection();){
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(SQLBack);
             if (rs.next()) {
@@ -197,21 +196,23 @@ public class UIRanking extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        try {
+                    String[] test = new String[5];
+            int contador = 0;
+        try (Connection con = MySQL.getConnection();){
 
-            Connection con = MySQL.getConnection();
             Statement stmt = con.createStatement();
             String SQLTOP1 = "SELECT userName,userPoints from `user_informations` where userPoints order by userPoints desc limit 5;";
             ResultSet rs = stmt.executeQuery(SQLTOP1);
-            if (rs.next()) {
-                top1.setText(rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos");
-                top2.setText(rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos");
-                System.out.print("Foi");
-                rs.close();
+            while (rs.next()) {
+                test[contador++] = rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos";
+                
             }
         } catch (Exception e) {
             System.out.println(e);
         }
+        top1.setText(test[0]);
+        top2.setText(test[1]);
+        
     }//GEN-LAST:event_formWindowActivated
 
     /**

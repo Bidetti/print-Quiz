@@ -111,8 +111,7 @@ public class UILogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (userTextField.getText().length() >= 3 && userTextField.getText().length() <= 21) {
             if (userPasswordField.getText().length() >= 3 && userPasswordField.getText().length() <= 21) {
-                try {
-                    Connection con = MySQL.getConnection();
+                try (Connection con = MySQL.getConnection();){
                     Statement stmt = con.createStatement();
 
                     String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + userTextField.getText() + "'";
@@ -185,12 +184,16 @@ public class UILogin extends javax.swing.JFrame {
 
     private void userPasswordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userPasswordFieldMouseClicked
         // TODO add your handling code here:
-        userPasswordField.setText("");
+        if (userPasswordField.getText().equals("Senha...")){
+            userPasswordField.setText("");
+        }
     }//GEN-LAST:event_userPasswordFieldMouseClicked
 
     private void userTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTextFieldMouseClicked
         // TODO add your handling code here:
-        userTextField.setText("");
+        if (userTextField.getText().equals("Digite seu usuário aqui...")){
+            userTextField.setText("");
+        }
     }//GEN-LAST:event_userTextFieldMouseClicked
 
     /**

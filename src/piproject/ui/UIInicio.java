@@ -205,8 +205,7 @@ public class UIInicio extends javax.swing.JFrame {
 
     private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            Connection con = MySQL.getConnection();
+        try (Connection con = MySQL.getConnection();){
             String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'false' where `userName`= '" + nome + "'";
             PreparedStatement pstmt = con.prepareStatement(updateStatus);
             UILogin frame = new UILogin();

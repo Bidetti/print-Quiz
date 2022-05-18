@@ -100,8 +100,7 @@ public class UIRegister extends javax.swing.JFrame {
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
 
         if (userTextField.getText().length() >= 3 && userTextField.getText().length() <= 21) {
-            try {
-                Connection con = MySQL.getConnection();
+            try (Connection con = MySQL.getConnection();){
                 Statement stmt = con.createStatement();
 
                 String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + userTextField.getText() + "'";
@@ -116,7 +115,6 @@ public class UIRegister extends javax.swing.JFrame {
                     frame.setVisible(true);
                     this.setVisible(false);
 
-                    con.close();
                     stmt.close();
                     rs.close();
                     insertUser.close();
@@ -149,12 +147,16 @@ public class UIRegister extends javax.swing.JFrame {
 
     private void userTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTextFieldMouseClicked
         // TODO add your handling code here:
-        userTextField.setText("");
+        if (userTextField.getText().equals("Crie seu usuário aqui...")){
+            userTextField.setText("");
+        }
     }//GEN-LAST:event_userTextFieldMouseClicked
 
     private void userPasswordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userPasswordFieldMouseClicked
         // TODO add your handling code here:
-        userPasswordField.setText("");
+        if (userPasswordField.getText().equals("Senha...")){
+            userPasswordField.setText("");
+        }
     }//GEN-LAST:event_userPasswordFieldMouseClicked
 
     /**
