@@ -204,15 +204,18 @@ public class UIRanking extends javax.swing.JFrame {
             String SQLTOP1 = "SELECT userName,userPoints from `user_informations` where userPoints order by userPoints desc limit 5;";
             ResultSet rs = stmt.executeQuery(SQLTOP1);
             while (rs.next()) {
+                System.out.println(contador);
                 test[contador++] = rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos";
-                
+               
             }
         } catch (Exception e) {
             System.out.println(e);
         }
         top1.setText(test[0]);
         top2.setText(test[1]);
-        
+        top3.setText(test[2]);
+        top4.setText(test[3]);
+        top5.setText(test[4]);
     }//GEN-LAST:event_formWindowActivated
 
     /**

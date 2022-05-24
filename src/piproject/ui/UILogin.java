@@ -56,53 +56,55 @@ public class UILogin extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        userTextField.setText("Digite seu usuário aqui...");
-        userTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userTextFieldMouseClicked(evt);
-            }
-        });
-        getContentPane().add(userTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 221, -1));
+        userTextField.setPreferredSize(new java.awt.Dimension(440, 65));
+        getContentPane().add(userTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, 440, -1));
 
-        userPasswordField.setText("Senha...");
-        userPasswordField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userPasswordFieldMouseClicked(evt);
-            }
-        });
-        getContentPane().add(userPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 220, -1));
+        userPasswordField.setPreferredSize(new java.awt.Dimension(440, 65));
+        getContentPane().add(userPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 621, 440, -1));
 
         startButton.setText("Conectar");
+        startButton.setAlignmentY(0.0F);
+        startButton.setPreferredSize(new java.awt.Dimension(248, 62));
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 90, -1));
+        getContentPane().add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(836, 762, 248, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Impact", 0, 32)); // NOI18N
         jLabel3.setText("Usuário:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        jLabel3.setAlignmentX(740.0F);
+        jLabel3.setAlignmentY(405.0F);
+        jLabel3.setPreferredSize(new java.awt.Dimension(159, 49));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 405, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Impact", 0, 32)); // NOI18N
         jLabel4.setText("Senha:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        jLabel4.setPreferredSize(new java.awt.Dimension(159, 49));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 571, -1, -1));
 
         registerButton.setText("Registre-se");
+        registerButton.setPreferredSize(new java.awt.Dimension(142, 48));
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, -1));
+        getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(895, 861, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
-        jLabel1.setText("print('Quiz!')");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
+        jLabel1.setText("          print('Quiz!')");
+        jLabel1.setAlignmentX(462.0F);
+        jLabel1.setAlignmentY(69.0F);
+        jLabel1.setPreferredSize(new java.awt.Dimension(990, 101));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 69, 997, 101));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/fundo_login.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 280));
+        jLabel2.setAlignmentY(0.0F);
+        jLabel2.setAutoscrolls(true);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -181,20 +183,6 @@ public class UILogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowActivated
-
-    private void userPasswordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userPasswordFieldMouseClicked
-        // TODO add your handling code here:
-        if (userPasswordField.getText().equals("Senha...")){
-            userPasswordField.setText("");
-        }
-    }//GEN-LAST:event_userPasswordFieldMouseClicked
-
-    private void userTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTextFieldMouseClicked
-        // TODO add your handling code here:
-        if (userTextField.getText().equals("Digite seu usuário aqui...")){
-            userTextField.setText("");
-        }
-    }//GEN-LAST:event_userTextFieldMouseClicked
 
     /**
      * @param args the command line arguments

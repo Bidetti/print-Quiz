@@ -30,6 +30,7 @@ public class UIInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fundo = new javax.swing.JLabel();
         inicioLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         quizButton = new javax.swing.JButton();
@@ -38,7 +39,6 @@ public class UIInicio extends javax.swing.JFrame {
         rankTitle = new javax.swing.JLabel();
         pointsTitle = new javax.swing.JLabel();
         averageTitle = new javax.swing.JLabel();
-        fundo = new javax.swing.JLabel();
         rankingTitle = new javax.swing.JLabel();
         rankInfo = new javax.swing.JLabel();
         pointsInfo = new javax.swing.JLabel();
@@ -51,6 +51,9 @@ public class UIInicio extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/fundo_login.png"))); // NOI18N
+        fundo.setText("jLabel2");
 
         inicioLabel.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 30)); // NOI18N
         inicioLabel.setText("ÍNICIO");
@@ -89,9 +92,6 @@ public class UIInicio extends javax.swing.JFrame {
         averageTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         averageTitle.setText("Porcentagem de acertos:");
 
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/fundo_login.png"))); // NOI18N
-        fundo.setText("jLabel2");
-
         rankingTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         rankingTitle.setText("Classificação:");
 
@@ -129,10 +129,9 @@ public class UIInicio extends javax.swing.JFrame {
                             .addComponent(rankingInfo)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(inicioLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(disconnectButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(disconnectButton)
+                            .addComponent(inicioLabel))))
                 .addContainerGap(119, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -141,7 +140,7 @@ public class UIInicio extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(360, Short.MAX_VALUE)
+                    .addContainerGap(364, Short.MAX_VALUE)
                     .addComponent(jLabel2)
                     .addGap(126, 126, 126)))
         );
@@ -172,9 +171,9 @@ public class UIInicio extends javax.swing.JFrame {
                 .addComponent(rankingTitle)
                 .addGap(18, 18, 18)
                 .addComponent(rankingInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(disconnectButton)
-                .addContainerGap())
+                .addGap(17, 17, 17))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
