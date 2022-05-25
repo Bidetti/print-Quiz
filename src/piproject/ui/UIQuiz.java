@@ -5,7 +5,6 @@
 package piproject.ui;
 
 /**
- *
  * @author Bidetti
  */
 public class UIQuiz extends javax.swing.JFrame {
@@ -30,48 +29,28 @@ public class UIQuiz extends javax.swing.JFrame {
         questionQuiz = new javax.swing.JLabel();
         progressQuiz = new javax.swing.JProgressBar();
         progressTitle = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1920, 1080));
+        setMinimumSize(new java.awt.Dimension(1920, 1080));
+        setSize(new java.awt.Dimension(1920, 1080));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         questionTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         questionTitle.setText("Pergunta #1");
+        getContentPane().add(questionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 16, 208, 57));
 
         questionQuiz.setText("texto da pergunta");
+        getContentPane().add(questionQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 79, 573, 99));
+        getContentPane().add(progressQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 38, 194, 35));
 
         progressTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         progressTitle.setText("Progresso:");
+        getContentPane().add(progressTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 12, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(questionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(progressQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(progressTitle))
-                .addGap(18, 18, 18))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(questionQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(questionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(progressTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(progressQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(questionQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(274, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -83,7 +62,7 @@ public class UIQuiz extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -112,6 +91,7 @@ public class UIQuiz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     public javax.swing.JProgressBar progressQuiz;
     private javax.swing.JLabel progressTitle;
     private javax.swing.JLabel questionQuiz;

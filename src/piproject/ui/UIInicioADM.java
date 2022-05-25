@@ -40,6 +40,7 @@ public class UIInicioADM extends javax.swing.JFrame {
         usersOnInfo = new javax.swing.JLabel();
         usersInfo = new javax.swing.JLabel();
         mediaInfo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,114 +49,68 @@ public class UIInicioADM extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        inicioLabel.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 30)); // NOI18N
+        inicioLabel.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
         inicioLabel.setText("ÍNICIO - ADM");
+        getContentPane().add(inicioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 65, 660, -1));
 
         searchButton.setBackground(new java.awt.Color(51, 153, 255));
-        searchButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        searchButton.setFont(new java.awt.Font("Impact", 1, 45)); // NOI18N
         searchButton.setText("Consultar usuários");
+        getContentPane().add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 251, 450, 110));
 
         rankingButton.setBackground(new java.awt.Color(51, 153, 255));
-        rankingButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rankingButton.setFont(new java.awt.Font("Impact", 1, 60)); // NOI18N
         rankingButton.setText("Ranking");
         rankingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rankingButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(rankingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 551, 450, 110));
 
         disconnectButton.setBackground(new java.awt.Color(255, 0, 51));
-        disconnectButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        disconnectButton.setFont(new java.awt.Font("Impact", 1, 36)); // NOI18N
         disconnectButton.setText("Desconectar");
         disconnectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 disconnectButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(disconnectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 851, 283, 63));
 
-        userOnTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        userOnTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         userOnTitle.setText("Usuários online:");
+        getContentPane().add(userOnTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 426, -1, -1));
 
-        usersTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        usersTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         usersTitle.setText("Usuários registrados:");
+        getContentPane().add(usersTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 568, -1, -1));
 
-        mediaTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mediaTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         mediaTitle.setText("Média de acertos:");
+        getContentPane().add(mediaTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 717, -1, -1));
 
+        usersOnInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
         usersOnInfo.setText("Falha no carregamento...");
+        getContentPane().add(usersOnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 500, -1, -1));
 
+        usersInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
         usersInfo.setText("Falha no carregamento...");
+        getContentPane().add(usersInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 648, -1, -1));
 
+        mediaInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
         mediaInfo.setText("Falha no carregamento...");
+        getContentPane().add(mediaInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 793, -1, -1));
 
-        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/fundo_login.png"))); // NOI18N
-        fundo.setText("jLabel2");
+        jLabel1.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
+        jLabel1.setText("Informações");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 312, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rankingButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(126, 126, 126)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mediaTitle)
-                            .addComponent(userOnTitle)
-                            .addComponent(usersTitle)
-                            .addComponent(usersOnInfo)
-                            .addComponent(usersInfo)
-                            .addComponent(mediaInfo)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(disconnectButton)
-                            .addComponent(inicioLabel))))
-                .addContainerGap(146, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(11, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(inicioLabel)
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(userOnTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(usersOnInfo))
-                            .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addComponent(usersTitle)
-                        .addGap(18, 18, 18)
-                        .addComponent(rankingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(usersInfo)
-                        .addGap(18, 18, 18)
-                        .addComponent(mediaTitle)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mediaInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                .addComponent(disconnectButton)
-                .addGap(16, 16, 16))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(10, 10, 10)
-                    .addComponent(fundo, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(10, Short.MAX_VALUE)))
-        );
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
+        fundo.setText("Informações");
+        getContentPane().add(fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -168,7 +123,7 @@ public class UIInicioADM extends javax.swing.JFrame {
 
     private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
         // TODO add your handling code here:
-        try (Connection con = MySQL.getConnection();){
+        try (Connection con = MySQL.getConnection();) {
             String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'false' where `userName`= '" + nome + "'";
             PreparedStatement pstmt = con.prepareStatement(updateStatus);
             UILogin frame = new UILogin();
@@ -232,6 +187,7 @@ public class UIInicioADM extends javax.swing.JFrame {
     private javax.swing.JButton disconnectButton;
     private javax.swing.JLabel fundo;
     public javax.swing.JLabel inicioLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel mediaInfo;
     private javax.swing.JLabel mediaTitle;
     private javax.swing.JButton rankingButton;

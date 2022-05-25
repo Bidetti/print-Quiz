@@ -22,6 +22,8 @@ public class UILogin extends javax.swing.JFrame {
      */
     public UILogin() {
         initComponents();
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -38,11 +40,9 @@ public class UILogin extends javax.swing.JFrame {
         userTextField = new javax.swing.JTextField();
         userPasswordField = new javax.swing.JPasswordField();
         startButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        title = new javax.swing.JLabel();
+        fundo = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -56,12 +56,18 @@ public class UILogin extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        userTextField.setFont(new java.awt.Font("Impact", 0, 28)); // NOI18N
+        userTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Digite seu usuário:"));
         userTextField.setPreferredSize(new java.awt.Dimension(440, 65));
-        getContentPane().add(userTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, 440, -1));
+        getContentPane().add(userTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, 440, 65));
 
+        userPasswordField.setFont(new java.awt.Font("Impact", 0, 28)); // NOI18N
+        userPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder("Digite sua senha:"));
         userPasswordField.setPreferredSize(new java.awt.Dimension(440, 65));
         getContentPane().add(userPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 621, 440, -1));
 
+        startButton.setBackground(new java.awt.Color(51, 153, 255));
+        startButton.setFont(new java.awt.Font("Impact", 1, 24)); // NOI18N
         startButton.setText("Conectar");
         startButton.setAlignmentY(0.0F);
         startButton.setPreferredSize(new java.awt.Dimension(248, 62));
@@ -72,18 +78,8 @@ public class UILogin extends javax.swing.JFrame {
         });
         getContentPane().add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(836, 762, 248, -1));
 
-        jLabel3.setFont(new java.awt.Font("Impact", 0, 32)); // NOI18N
-        jLabel3.setText("Usuário:");
-        jLabel3.setAlignmentX(740.0F);
-        jLabel3.setAlignmentY(405.0F);
-        jLabel3.setPreferredSize(new java.awt.Dimension(159, 49));
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 405, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Impact", 0, 32)); // NOI18N
-        jLabel4.setText("Senha:");
-        jLabel4.setPreferredSize(new java.awt.Dimension(159, 49));
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 571, -1, -1));
-
+        registerButton.setBackground(new java.awt.Color(51, 153, 255));
+        registerButton.setFont(new java.awt.Font("Impact", 1, 18)); // NOI18N
         registerButton.setText("Registre-se");
         registerButton.setPreferredSize(new java.awt.Dimension(142, 48));
         registerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,18 +89,18 @@ public class UILogin extends javax.swing.JFrame {
         });
         getContentPane().add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(895, 861, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
-        jLabel1.setText("          print('Quiz!')");
-        jLabel1.setAlignmentX(462.0F);
-        jLabel1.setAlignmentY(69.0F);
-        jLabel1.setPreferredSize(new java.awt.Dimension(990, 101));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 69, 997, 101));
+        title.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
+        title.setText("          print('Quiz!')");
+        title.setAlignmentX(462.0F);
+        title.setAlignmentY(69.0F);
+        title.setPreferredSize(new java.awt.Dimension(990, 101));
+        getContentPane().add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 997, 101));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        jLabel2.setAlignmentY(0.0F);
-        jLabel2.setAutoscrolls(true);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
+        fundo.setText("jLabel2");
+        fundo.setAlignmentY(0.0F);
+        fundo.setAutoscrolls(true);
+        getContentPane().add(fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -113,7 +109,7 @@ public class UILogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (userTextField.getText().length() >= 3 && userTextField.getText().length() <= 21) {
             if (userPasswordField.getText().length() >= 3 && userPasswordField.getText().length() <= 21) {
-                try (Connection con = MySQL.getConnection();){
+                try (Connection con = MySQL.getConnection();) {
                     Statement stmt = con.createStatement();
 
                     String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + userTextField.getText() + "'";
@@ -181,7 +177,6 @@ public class UILogin extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        this.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowActivated
 
     /**
@@ -223,14 +218,12 @@ public class UILogin extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel fundo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton registerButton;
     public static javax.swing.JButton startButton;
+    private javax.swing.JLabel title;
     public javax.swing.JPasswordField userPasswordField;
     public static javax.swing.JTextField userTextField;
     // End of variables declaration//GEN-END:variables

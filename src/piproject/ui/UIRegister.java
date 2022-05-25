@@ -39,8 +39,8 @@ public class UIRegister extends javax.swing.JFrame {
         userPasswordField = new javax.swing.JPasswordField();
         createButton = new javax.swing.JButton();
         voltarButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        title = new javax.swing.JLabel();
+        fundo = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -54,47 +54,44 @@ public class UIRegister extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        userTextField.setText("Crie seu usuário aqui...");
-        userTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userTextFieldMouseClicked(evt);
-            }
-        });
-        getContentPane().add(userTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 221, -1));
+        userTextField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        userTextField.setBorder(javax.swing.BorderFactory.createTitledBorder("Crie seu usuário:"));
+        getContentPane().add(userTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 463, 440, 69));
 
-        userPasswordField.setText("Senha...");
-        userPasswordField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userPasswordFieldMouseClicked(evt);
-            }
-        });
-        getContentPane().add(userPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 220, -1));
+        userPasswordField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        userPasswordField.setBorder(javax.swing.BorderFactory.createTitledBorder("Crie sua senha:"));
+        getContentPane().add(userPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 621, 440, 69));
 
+        createButton.setBackground(new java.awt.Color(51, 153, 255));
+        createButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         createButton.setText("Criar");
         createButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(createButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 70, -1));
+        getContentPane().add(createButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 796, 174, 54));
 
+        voltarButton.setBackground(new java.awt.Color(51, 153, 255));
+        voltarButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         voltarButton.setText("Voltar");
         voltarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 voltarButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(voltarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
+        getContentPane().add(voltarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 796, 174, 54));
 
-        jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
-        jLabel1.setText("print('Quiz!')");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
+        title.setBackground(new java.awt.Color(255, 255, 255));
+        title.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
+        title.setText("print('Quiz!')");
+        getContentPane().add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 69, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        jLabel2.setAlignmentY(0.0F);
-        jLabel2.setPreferredSize(new java.awt.Dimension(1920, 1080));
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
+        fundo.setText("jLabel2");
+        fundo.setAlignmentY(0.0F);
+        fundo.setPreferredSize(new java.awt.Dimension(1920, 1080));
+        getContentPane().add(fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -102,7 +99,7 @@ public class UIRegister extends javax.swing.JFrame {
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
 
         if (userTextField.getText().length() >= 3 && userTextField.getText().length() <= 21) {
-            try (Connection con = MySQL.getConnection();){
+            try (Connection con = MySQL.getConnection();) {
                 Statement stmt = con.createStatement();
 
                 String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + userTextField.getText() + "'";
@@ -147,20 +144,6 @@ public class UIRegister extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowOpened
 
-    private void userTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTextFieldMouseClicked
-        // TODO add your handling code here:
-        if (userTextField.getText().equals("Crie seu usuário aqui...")){
-            userTextField.setText("");
-        }
-    }//GEN-LAST:event_userTextFieldMouseClicked
-
-    private void userPasswordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userPasswordFieldMouseClicked
-        // TODO add your handling code here:
-        if (userPasswordField.getText().equals("Senha...")){
-            userPasswordField.setText("");
-        }
-    }//GEN-LAST:event_userPasswordFieldMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -199,10 +182,10 @@ public class UIRegister extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton createButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel fundo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel title;
     public javax.swing.JPasswordField userPasswordField;
     public javax.swing.JTextField userTextField;
     private javax.swing.JButton voltarButton;

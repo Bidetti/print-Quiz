@@ -44,9 +44,11 @@ public class UIRanking extends javax.swing.JFrame {
         top4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         top5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ranking");
+        setMinimumSize(new java.awt.Dimension(1920, 1080));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -56,105 +58,64 @@ public class UIRanking extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
         jLabel1.setText("RANKING");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 65, -1, -1));
 
+        backButton.setBackground(new java.awt.Color(51, 153, 255));
+        backButton.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         backButton.setText("Voltar");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(801, 869, 317, 74));
 
+        jLabel2.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel2.setText("1.");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 257, -1, -1));
 
+        top1.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top1.setText("Erro ao carregar usuário...");
+        getContentPane().add(top1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 257, 570, -1));
 
+        top2.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top2.setText("Erro ao carregar usuário...");
+        getContentPane().add(top2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 386, 570, -1));
 
+        jLabel3.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel3.setText("2.");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 386, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel4.setText("3.");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 501, -1, -1));
 
+        top3.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top3.setText("Erro ao carregar usuário...");
+        getContentPane().add(top3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 501, 570, -1));
 
+        jLabel5.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel5.setText("4.");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 616, -1, -1));
 
+        top4.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top4.setText("Erro ao carregar usuário...");
+        getContentPane().add(top4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 616, 570, -1));
 
+        jLabel6.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel6.setText("5.");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 731, -1, -1));
 
+        top5.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top5.setText("Erro ao carregar usuário...");
+        getContentPane().add(top5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 731, 570, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(119, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addGap(293, 293, 293))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(jLabel6)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(top5, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                .addGroup(layout.createSequentialGroup()
-                                                                        .addComponent(jLabel5)
-                                                                        .addGap(18, 18, 18)
-                                                                        .addComponent(top4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(jLabel4)
-                                                                                .addGap(18, 18, 18)
-                                                                                .addComponent(top3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                        .addComponent(jLabel3)
-                                                                                        .addGap(18, 18, 18)
-                                                                                        .addComponent(top2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                        .addComponent(jLabel2)
-                                                                                        .addGap(18, 18, 18)
-                                                                                        .addComponent(top1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                                .addGap(201, 201, 201))))
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel1)
-                                .addGap(43, 43, 43)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(top1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(top2)
-                                        .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(top3))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel5)
-                                        .addComponent(top4))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(top5))
-                                .addGap(174, 174, 174)
-                                .addComponent(backButton)
-                                .addGap(50, 50, 50))
-        );
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,7 +123,7 @@ public class UIRanking extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         String SQLBack = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
-        try (Connection con = MySQL.getConnection();){
+        try (Connection con = MySQL.getConnection();) {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(SQLBack);
             if (rs.next()) {
@@ -196,9 +157,9 @@ public class UIRanking extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-                    String[] test = new String[5];
-            int contador = 0;
-        try (Connection con = MySQL.getConnection();){
+        String[] test = new String[5];
+        int contador = 0;
+        try (Connection con = MySQL.getConnection();) {
 
             Statement stmt = con.createStatement();
             String SQLTOP1 = "SELECT userName,userPoints from `user_informations` where userPoints order by userPoints desc limit 5;";
@@ -206,7 +167,7 @@ public class UIRanking extends javax.swing.JFrame {
             while (rs.next()) {
                 System.out.println(contador);
                 test[contador++] = rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos";
-               
+
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -261,6 +222,7 @@ public class UIRanking extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     public javax.swing.JLabel top1;
     public javax.swing.JLabel top2;
     public javax.swing.JLabel top3;
