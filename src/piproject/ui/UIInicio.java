@@ -8,6 +8,8 @@ import piproject.mysql.MySQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * @author rafae
@@ -142,6 +144,17 @@ public class UIInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         inicioLabel.setText("INICIO - " + nome);
         this.setLocationRelativeTo(null);
+        try (Connection con = MySQL.getConnection();) {
+                    Statement stmt = con.createStatement();
+                String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
+                ResultSet rs = stmt.executeQuery(SQLUser);
+                if (rs.next()) {
+                    rankInfo.setText(rs.getString("userRank"));
+                    pointsInfo.setText(""+rs.getInt("userPoints"));
+                }
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
     }//GEN-LAST:event_formWindowOpened
 
     private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
@@ -212,7 +225,7 @@ public class UIInicio extends javax.swing.JFrame {
     private javax.swing.JLabel pointsInfo;
     private javax.swing.JLabel pointsTitle;
     private javax.swing.JButton quizButton;
-    private javax.swing.JLabel rankInfo;
+    public javax.swing.JLabel rankInfo;
     private javax.swing.JLabel rankTitle;
     private javax.swing.JButton rankingButton;
     private javax.swing.JLabel rankingInfo;

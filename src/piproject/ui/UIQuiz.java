@@ -4,11 +4,23 @@
  */
 package piproject.ui;
 
+import piproject.mysql.MySQL;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 /**
  * @author Bidetti
  */
 public class UIQuiz extends javax.swing.JFrame {
 
+    
+    int corretas = 0;
+    int erradas = 0;
+    int progresso = 1;
+    int pergunta = 0;
+    String resposta;
     /**
      * Creates new form UIQuiz
      */
@@ -26,10 +38,16 @@ public class UIQuiz extends javax.swing.JFrame {
     private void initComponents() {
 
         questionTitle = new javax.swing.JLabel();
-        questionQuiz = new javax.swing.JLabel();
         progressQuiz = new javax.swing.JProgressBar();
         progressTitle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        questionText = new javax.swing.JLabel();
+        answer3 = new javax.swing.JRadioButton();
+        answer1 = new javax.swing.JRadioButton();
+        answer2 = new javax.swing.JRadioButton();
+        answer4 = new javax.swing.JRadioButton();
+        nextButton = new javax.swing.JButton();
+        cancelButton1 = new javax.swing.JButton();
+        fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 1080));
@@ -37,23 +55,121 @@ public class UIQuiz extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1920, 1080));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        questionTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        questionTitle.setFont(new java.awt.Font("Segoe UI", 3, 96)); // NOI18N
+        questionTitle.setForeground(new java.awt.Color(255, 255, 255));
         questionTitle.setText("Pergunta #1");
-        getContentPane().add(questionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 16, 208, 57));
+        questionTitle.setAlignmentY(0.0F);
+        questionTitle.setAutoscrolls(true);
+        questionTitle.setPreferredSize(new java.awt.Dimension(934, 186));
+        getContentPane().add(questionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 934, 186));
 
-        questionQuiz.setText("texto da pergunta");
-        getContentPane().add(questionQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 79, 573, 99));
-        getContentPane().add(progressQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 38, 194, 35));
+        progressQuiz.setMaximum(15);
+        progressQuiz.setAlignmentX(0.0F);
+        progressQuiz.setAlignmentY(0.0F);
+        progressQuiz.setPreferredSize(new java.awt.Dimension(200, 4));
+        getContentPane().add(progressQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 240, 340, 35));
 
-        progressTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        progressTitle.setText("Progresso:");
-        getContentPane().add(progressTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 12, -1, -1));
+        progressTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        progressTitle.setText("Progresso: 0/15");
+        getContentPane().add(progressTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 200, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
+        questionText.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        questionText.setForeground(new java.awt.Color(255, 255, 255));
+        questionText.setText("Erro ao carregar pergunta...");
+        questionText.setToolTipText("");
+        questionText.setAlignmentY(0.0F);
+        questionText.setPreferredSize(new java.awt.Dimension(1444, 118));
+        getContentPane().add(questionText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 1444, 118));
+
+        answer3.setText("Erro ao carregar a resposta");
+        answer3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answer3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(answer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 450, 600, 80));
+
+        answer1.setText("Erro ao carregar a resposta");
+        answer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answer1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(answer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 600, 80));
+
+        answer2.setText("Erro ao carregar a resposta");
+        answer2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answer2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(answer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 670, 600, 80));
+
+        answer4.setText("Erro ao carregar a resposta");
+        answer4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                answer4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(answer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 670, 600, 80));
+
+        nextButton.setBackground(new java.awt.Color(51, 153, 255));
+        nextButton.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
+        nextButton.setText("Próximo");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 960, 317, 74));
+
+        cancelButton1.setBackground(new java.awt.Color(51, 153, 255));
+        cancelButton1.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
+        cancelButton1.setText("Cancelar");
+        cancelButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cancelButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 960, 317, 74));
+
+        fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
+        getContentPane().add(fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        // TODO add your handling code here:
+        progresso = progresso + 1;
+        
+        
+    }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_cancelButton1ActionPerformed
+
+    private void answer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answer1ActionPerformed
+        // TODO add your handling code here:
+        resposta = "A";
+    }//GEN-LAST:event_answer1ActionPerformed
+
+    private void answer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answer2ActionPerformed
+        // TODO add your handling code here:
+        resposta = "B";
+    }//GEN-LAST:event_answer2ActionPerformed
+
+    private void answer4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answer4ActionPerformed
+        // TODO add your handling code here:
+        resposta = "C";
+    }//GEN-LAST:event_answer4ActionPerformed
+
+    private void answer3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answer3ActionPerformed
+        // TODO add your handling code here:
+        resposta = "D";
+    }//GEN-LAST:event_answer3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -91,10 +207,16 @@ public class UIQuiz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton answer1;
+    private javax.swing.JRadioButton answer2;
+    private javax.swing.JRadioButton answer3;
+    private javax.swing.JRadioButton answer4;
+    private javax.swing.JButton cancelButton1;
+    private javax.swing.JLabel fundo;
+    private javax.swing.JButton nextButton;
     public javax.swing.JProgressBar progressQuiz;
     private javax.swing.JLabel progressTitle;
-    private javax.swing.JLabel questionQuiz;
+    private javax.swing.JLabel questionText;
     private javax.swing.JLabel questionTitle;
     // End of variables declaration//GEN-END:variables
 }

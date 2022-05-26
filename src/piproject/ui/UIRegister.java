@@ -99,6 +99,7 @@ public class UIRegister extends javax.swing.JFrame {
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
 
         if (userTextField.getText().length() >= 3 && userTextField.getText().length() <= 21) {
+            if (userPasswordField.getText().length() >= 3 && userPasswordField.getText().length() <= 21) {
             try (Connection con = MySQL.getConnection();) {
                 Statement stmt = con.createStatement();
 
@@ -123,12 +124,12 @@ public class UIRegister extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e);
             }
+            } else {
+                JOptionPane.showMessageDialog(null, "Sua senha deve conter entre 3 até 21 caracteres");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Seu usuário deve conter entre 3 até 21 caracteres");
         }
-        /*}else {
-            JOptionPane.showMessageDialog(null, "Seu RA deve conter 10 caracteres");
-        }*/
 
     }//GEN-LAST:event_createButtonActionPerformed
 

@@ -53,7 +53,6 @@ public class UIRanking extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
-
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -62,7 +61,7 @@ public class UIRanking extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
         jLabel1.setText("RANKING");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 65, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 65, 400, -1));
 
         backButton.setBackground(new java.awt.Color(51, 153, 255));
         backButton.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
