@@ -53,6 +53,7 @@ public class UIRanking extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
+
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -126,19 +127,13 @@ public class UIRanking extends javax.swing.JFrame {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(SQLBack);
             if (rs.next()) {
-                if (rs.getNString("userStatus").equals("true")) {
-                    if (rs.getNString("userPermission").equals("user")) {
-                        UIInicio frameuser = new UIInicio();
-                        frameuser.setVisible(true);
-                        this.setVisible(false);
-                    } else if (rs.getNString("userPermission").equals("admin")) {
-                        UIInicioADM frameadmin = new UIInicioADM();
-                        frameadmin.setVisible(true);
-                        this.setVisible(false);
-                    }
-                } else {
-                    UILogin framelogin = new UILogin();
-                    framelogin.setVisible(true);
+                if (rs.getNString("userPermission").equals("user")) {
+                    UIInicio frameuser = new UIInicio();
+                    frameuser.setVisible(true);
+                    this.setVisible(false);
+                } else if (rs.getNString("userPermission").equals("admin")) {
+                    UIInicioADM frameadmin = new UIInicioADM();
+                    frameadmin.setVisible(true);
                     this.setVisible(false);
                 }
             }
@@ -164,7 +159,6 @@ public class UIRanking extends javax.swing.JFrame {
             String SQLTOP1 = "SELECT userName,userPoints from `user_informations` where userPoints order by userPoints desc limit 5;";
             ResultSet rs = stmt.executeQuery(SQLTOP1);
             while (rs.next()) {
-                System.out.println(contador);
                 test[contador++] = rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos";
 
             }

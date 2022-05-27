@@ -100,30 +100,30 @@ public class UIRegister extends javax.swing.JFrame {
 
         if (userTextField.getText().length() >= 3 && userTextField.getText().length() <= 21) {
             if (userPasswordField.getText().length() >= 3 && userPasswordField.getText().length() <= 21) {
-            try (Connection con = MySQL.getConnection();) {
-                Statement stmt = con.createStatement();
+                try (Connection con = MySQL.getConnection();) {
+                    Statement stmt = con.createStatement();
 
-                String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + userTextField.getText() + "'";
-                ResultSet rs = stmt.executeQuery(SQLUser);
+                    String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + userTextField.getText() + "'";
+                    ResultSet rs = stmt.executeQuery(SQLUser);
 
-                if (rs.next() == false) {
-                    PreparedStatement insertUser = con.prepareStatement("INSERT INTO `piproject`.`user_informations` (`userName`, `userPassword`) VALUES ('" + userTextField.getText() + "', '" + userPasswordField.getText() + "');");
-                    insertUser.execute();
-                    JOptionPane.showMessageDialog(null, "Usuário criado com sucesso. Conecte-se!");
+                    if (rs.next() == false) {
+                        PreparedStatement insertUser = con.prepareStatement("INSERT INTO `piproject`.`user_informations` (`userName`, `userPassword`) VALUES ('" + userTextField.getText() + "', '" + userPasswordField.getText() + "');");
+                        insertUser.execute();
+                        JOptionPane.showMessageDialog(null, "Usuário criado com sucesso. Conecte-se!");
 
-                    UILogin frame = new UILogin();
-                    frame.setVisible(true);
-                    this.setVisible(false);
+                        UILogin frame = new UILogin();
+                        frame.setVisible(true);
+                        this.setVisible(false);
 
-                    stmt.close();
-                    rs.close();
-                    insertUser.close();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuário já existente!");
+                        stmt.close();
+                        rs.close();
+                        insertUser.close();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuário já existente!");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
             } else {
                 JOptionPane.showMessageDialog(null, "Sua senha deve conter entre 3 até 21 caracteres");
             }

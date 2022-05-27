@@ -7,20 +7,22 @@ package piproject.ui;
 import piproject.mysql.MySQL;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+
 /**
  * @author Bidetti
  */
 public class UIQuiz extends javax.swing.JFrame {
 
-    
+
     int corretas = 0;
     int erradas = 0;
-    int progresso = 1;
-    int pergunta = 0;
+    int pergunta = 1;
     String resposta;
+
     /**
      * Creates new form UIQuiz
      */
@@ -63,14 +65,16 @@ public class UIQuiz extends javax.swing.JFrame {
         questionTitle.setPreferredSize(new java.awt.Dimension(934, 186));
         getContentPane().add(questionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 934, 186));
 
+        progressQuiz.setForeground(new java.awt.Color(102, 255, 51));
         progressQuiz.setMaximum(15);
+        progressQuiz.setValue(1);
         progressQuiz.setAlignmentX(0.0F);
         progressQuiz.setAlignmentY(0.0F);
         progressQuiz.setPreferredSize(new java.awt.Dimension(200, 4));
         getContentPane().add(progressQuiz, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 240, 340, 35));
 
         progressTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        progressTitle.setText("Progresso: 0/15");
+        progressTitle.setText("Progresso: 1/15");
         getContentPane().add(progressTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 200, -1, -1));
 
         questionText.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -121,7 +125,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 nextButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 960, 317, 74));
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 920, 317, 74));
 
         cancelButton1.setBackground(new java.awt.Color(51, 153, 255));
         cancelButton1.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
@@ -131,7 +135,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 cancelButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(cancelButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 960, 317, 74));
+        getContentPane().add(cancelButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 920, 317, 74));
 
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
         getContentPane().add(fundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
@@ -141,14 +145,44 @@ public class UIQuiz extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
-        progresso = progresso + 1;
-        
-        
+        if (pergunta < 15) {
+            pergunta = pergunta + 1;
+            progressQuiz.setValue(pergunta);
+            progressTitle.setText(String.format("Progresso: %d/15", pergunta));
+            questionTitle.setText(String.format("Pergunta #%d", pergunta));
+        } else {
+            String SQLBack = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
+            try (Connection con = MySQL.getConnection();) {
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(SQLBack);
+                if (rs.next()) {
+                    if (rs.getNString("userPermission").equals("user")) {
+                        JOptionPane.showMessageDialog(null, "QUIZ finalizado! Voltando a tela inicial");
+                        UIInicio frameuser = new UIInicio();
+                        frameuser.setVisible(true);
+                        this.setVisible(false);
+                    }
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        try (Connection con = MySQL.getConnection();) {
+            String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'false' where `userName`= '" + nome + "'";
+            PreparedStatement pstmt = con.prepareStatement(updateStatus);
+            pstmt.executeUpdate();
+            pstmt.close();
+            con.close();
+            this.dispose();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_cancelButton1ActionPerformed
 
     private void answer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answer1ActionPerformed
@@ -205,6 +239,8 @@ public class UIQuiz extends javax.swing.JFrame {
             }
         });
     }
+
+    private String nome = UILogin.userTextField.getText();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton answer1;

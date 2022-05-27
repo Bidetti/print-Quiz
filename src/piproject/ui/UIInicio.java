@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  * @author rafae
@@ -145,36 +146,50 @@ public class UIInicio extends javax.swing.JFrame {
         inicioLabel.setText("INICIO - " + nome);
         this.setLocationRelativeTo(null);
         try (Connection con = MySQL.getConnection();) {
-                    Statement stmt = con.createStatement();
-                String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
-                ResultSet rs = stmt.executeQuery(SQLUser);
-                if (rs.next()) {
-                    rankInfo.setText(rs.getString("userRank"));
-                    pointsInfo.setText(""+rs.getInt("userPoints"));
-                }
-                } catch (Exception e) {
-                    System.err.println(e);
-                }
+            Statement stmt = con.createStatement();
+            String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
+            ResultSet rs = stmt.executeQuery(SQLUser);
+            if (rs.next()) {
+                rankInfo.setText(rs.getString("userRank"));
+                pointsInfo.setText("" + rs.getInt("userPoints"));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
         // TODO add your handling code here:
-        try (Connection con = MySQL.getConnection();) {
-            String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'false' where `userName`= '" + nome + "'";
-            PreparedStatement pstmt = con.prepareStatement(updateStatus);
-            UILogin frame = new UILogin();
-            pstmt.executeUpdate();
-            frame.setVisible(true);
-            this.setVisible(false);
-            pstmt.close();
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        UILogin frame = new UILogin();
+        frame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_disconnectButtonActionPerformed
 
     private void quizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizButtonActionPerformed
         // TODO add your handling code here:
+        UIQuiz frame = new UIQuiz();
+        String SQLBack = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
+        try (Connection con = MySQL.getConnection();) {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(SQLBack);
+            if (rs.next()) {
+                if (rs.getNString("userStatus").equals("false")) {
+                    String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'true' where `userName`= '" + nome + "'";
+                    PreparedStatement pstmt = con.prepareStatement(updateStatus);
+                    pstmt.executeUpdate();
+                    frame.setVisible(true);
+                    this.setVisible(false);
+                    rs.close();
+                    stmt.close();
+                    pstmt.close();
+                    con.close();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Você já realizou um QUIZ anteriormente, se suas informações não estiver aparecendo contate um administrador.");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }//GEN-LAST:event_quizButtonActionPerformed
 
     /**

@@ -117,34 +117,27 @@ public class UILogin extends javax.swing.JFrame {
 
                     if (rs.next()) {
                         if (rs.getNString("userPassword") == null ? userPasswordField.getText() == null : rs.getNString("userPassword").equals(userPasswordField.getText())) {
-                                String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'true' where `userName`= '" + userTextField.getText() + "'";
-                                if (rs.getNString("userPermission").equals("user")) {
-                                    JOptionPane.showMessageDialog(null, "Conectando!!!");
-                                    UIInicio frame = new UIInicio();
-                                    frame.setVisible(true);
-                                    this.setVisible(false);
-                                    PreparedStatement pstmt = con.prepareStatement(updateStatus);
-                                    pstmt.executeUpdate();
+                            if (rs.getNString("userPermission").equals("user")) {
+                                JOptionPane.showMessageDialog(null, "Conectando!!!");
+                                UIInicio frame = new UIInicio();
+                                frame.setVisible(true);
+                                this.setVisible(false);
 
-                                    con.close();
-                                    stmt.close();
-                                    rs.close();
-                                    pstmt.close();
-                                } else if (rs.getNString("userPermission").equals("admin")) {
-                                    JOptionPane.showMessageDialog(null, "Conectando!!!");
-                                    UIInicioADM frame = new UIInicioADM();
-                                    frame.setVisible(true);
-                                    this.setVisible(false);
-                                    PreparedStatement pstmt = con.prepareStatement(updateStatus);
-                                    pstmt.executeUpdate();
+                                con.close();
+                                stmt.close();
+                                rs.close();
+                            } else if (rs.getNString("userPermission").equals("admin")) {
+                                JOptionPane.showMessageDialog(null, "Conectando!!!");
+                                UIInicioADM frame = new UIInicioADM();
+                                frame.setVisible(true);
+                                this.setVisible(false);
 
-                                    con.close();
-                                    stmt.close();
-                                    rs.close();
-                                    pstmt.close();
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Impossível verificar sua permissão! Contatar um administrador!");
-                                }
+                                con.close();
+                                stmt.close();
+                                rs.close();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Impossível verificar sua permissão! Contatar um administrador!");
+                            }
                         } else {
                             JOptionPane.showMessageDialog(null, "A senha informada está incorreta!");
                         }
