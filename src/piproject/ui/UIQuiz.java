@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +26,8 @@ public class UIQuiz extends javax.swing.JFrame {
     int erradas = 0;
     int pergunta = 1;
     String resposta;
+    
+    
 
     /**
      * Creates new form UIQuiz
@@ -150,23 +156,12 @@ public class UIQuiz extends javax.swing.JFrame {
             progressQuiz.setValue(pergunta);
             progressTitle.setText(String.format("Progresso: %d/15", pergunta));
             questionTitle.setText(String.format("Pergunta #%d", pergunta));
+            String SQLQuestions = "SELECT * FROM `piproject`.`questions` WHERE questionID=?";
         } else {
-            String SQLBack = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
-            try (Connection con = MySQL.getConnection();) {
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery(SQLBack);
-                if (rs.next()) {
-                    if (rs.getNString("userPermission").equals("user")) {
                         JOptionPane.showMessageDialog(null, "QUIZ finalizado! Voltando a tela inicial");
                         UIInicio frameuser = new UIInicio();
                         frameuser.setVisible(true);
                         this.setVisible(false);
-                    }
-                }
-
-            } catch (Exception e) {
-                System.out.println(e);
-            }
         }
     }//GEN-LAST:event_nextButtonActionPerformed
 
