@@ -26,7 +26,8 @@ public class UIQuiz extends javax.swing.JFrame {
     int erradas = 0;
     int pergunta = 1;
     String resposta;
-    
+    public List<Integer> listID = new ArrayList<>();
+
     
 
     /**
@@ -34,6 +35,7 @@ public class UIQuiz extends javax.swing.JFrame {
      */
     public UIQuiz() {
         initComponents();
+        listID.addAll(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15));
     }
 
     /**
@@ -61,6 +63,11 @@ public class UIQuiz extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(1920, 1080));
         setSize(new java.awt.Dimension(1920, 1080));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         questionTitle.setFont(new java.awt.Font("Segoe UI", 3, 96)); // NOI18N
@@ -157,6 +164,12 @@ public class UIQuiz extends javax.swing.JFrame {
             progressTitle.setText(String.format("Progresso: %d/15", pergunta));
             questionTitle.setText(String.format("Pergunta #%d", pergunta));
             String SQLQuestions = "SELECT * FROM `piproject`.`questions` WHERE questionID=?";
+            Random random = new Random();
+            int elementId = random.nextInt(listID.size());
+            int elementIndex = listID.get(elementId);
+            Integer elementRemoved = listID.remove(elementId);
+            System.err.println(elementRemoved + " removed!");
+            System.out.println(listID);
         } else {
                         JOptionPane.showMessageDialog(null, "QUIZ finalizado! Voltando a tela inicial");
                         UIInicio frameuser = new UIInicio();
@@ -170,6 +183,7 @@ public class UIQuiz extends javax.swing.JFrame {
         try (Connection con = MySQL.getConnection();) {
             String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'false' where `userName`= '" + nome + "'";
             PreparedStatement pstmt = con.prepareStatement(updateStatus);
+            JOptionPane.showMessageDialog(null, "QUIZ cancelado, sistema finalizando...");
             pstmt.executeUpdate();
             pstmt.close();
             con.close();
@@ -199,6 +213,10 @@ public class UIQuiz extends javax.swing.JFrame {
         // TODO add your handling code here:
         resposta = "D";
     }//GEN-LAST:event_answer3ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -231,11 +249,13 @@ public class UIQuiz extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UIQuiz().setVisible(true);
+                
             }
         });
     }
 
     private String nome = UILogin.userTextField.getText();
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton answer1;
