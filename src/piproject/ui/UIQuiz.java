@@ -22,20 +22,40 @@ import javax.swing.JOptionPane;
 public class UIQuiz extends javax.swing.JFrame {
 
 
-    int corretas = 0;
-    int erradas = 0;
+    int pontos;
     int pergunta = 1;
     String resposta;
     public List<Integer> listID = new ArrayList<>();
+    Random random = new Random();
+    int antigoIndex;
 
-    
 
     /**
      * Creates new form UIQuiz
      */
     public UIQuiz() {
         initComponents();
-        listID.addAll(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15));
+        listID.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
+        try (Connection con = MySQL.getConnection();) {
+            Statement stmt = con.createStatement();
+            int elementId = random.nextInt(listID.size());
+            int elementIndex = listID.get(elementId);
+            antigoIndex = elementIndex;
+            String SQLQuestions = "SELECT * FROM `piproject`.`questions` WHERE questionID=" + elementIndex;
+            listID.remove(elementId);
+            ResultSet rsQr = stmt.executeQuery(SQLQuestions);
+            if (rsQr.next()) {
+                questionText.setText(rsQr.getNString("question"));
+                answer1.setText(rsQr.getNString("answerA"));
+                answer2.setText(rsQr.getNString("answerB"));
+                answer3.setText(rsQr.getNString("answerC"));
+                answer4.setText(rsQr.getNString("answerD"));
+            }
+            stmt.close();
+            rsQr.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
     /**
@@ -90,7 +110,7 @@ public class UIQuiz extends javax.swing.JFrame {
         progressTitle.setText("Progresso: 1/15");
         getContentPane().add(progressTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 200, -1, -1));
 
-        questionText.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        questionText.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         questionText.setForeground(new java.awt.Color(255, 255, 255));
         questionText.setText("Erro ao carregar pergunta...");
         questionText.setToolTipText("");
@@ -104,7 +124,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 answer3ActionPerformed(evt);
             }
         });
-        getContentPane().add(answer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 450, 600, 80));
+        getContentPane().add(answer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 450, 640, 120));
 
         answer1.setText("Erro ao carregar a resposta");
         answer1.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +132,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 answer1ActionPerformed(evt);
             }
         });
-        getContentPane().add(answer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 600, 80));
+        getContentPane().add(answer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 640, 120));
 
         answer2.setText("Erro ao carregar a resposta");
         answer2.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +140,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 answer2ActionPerformed(evt);
             }
         });
-        getContentPane().add(answer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 670, 600, 80));
+        getContentPane().add(answer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 670, 640, 120));
 
         answer4.setText("Erro ao carregar a resposta");
         answer4.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +148,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 answer4ActionPerformed(evt);
             }
         });
-        getContentPane().add(answer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 670, 600, 80));
+        getContentPane().add(answer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 670, 640, 120));
 
         nextButton.setBackground(new java.awt.Color(51, 153, 255));
         nextButton.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
@@ -158,23 +178,65 @@ public class UIQuiz extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
+        answer1.setSelected(false);
+        answer2.setSelected(false);
+        answer3.setSelected(false);
+        answer4.setSelected(false);
         if (pergunta < 15) {
-            pergunta = pergunta + 1;
-            progressQuiz.setValue(pergunta);
-            progressTitle.setText(String.format("Progresso: %d/15", pergunta));
-            questionTitle.setText(String.format("Pergunta #%d", pergunta));
-            String SQLQuestions = "SELECT * FROM `piproject`.`questions` WHERE questionID=?";
-            Random random = new Random();
-            int elementId = random.nextInt(listID.size());
-            int elementIndex = listID.get(elementId);
-            Integer elementRemoved = listID.remove(elementId);
-            System.err.println(elementRemoved + " removed!");
-            System.out.println(listID);
+            try (Connection con = MySQL.getConnection();) {
+                Statement stmt = con.createStatement();
+                String SQLAnswer = "SELECT `isCorrect` FROM `piproject`.`questions` WHERE questionID=" + antigoIndex;
+                ResultSet rsAnswer = stmt.executeQuery(SQLAnswer);
+                if (rsAnswer.next()) {
+                    if (resposta.equals(rsAnswer.getNString("isCorrect").replaceAll("\"", ""))) {
+                        pontos = pontos + 10;
+                    }
+                }
+                int elementId = random.nextInt(listID.size());
+                int elementIndex = listID.get(elementId);
+                antigoIndex = elementIndex;
+                pergunta = pergunta + 1;
+                progressQuiz.setValue(pergunta);
+                progressTitle.setText(String.format("Progresso: %d/15", pergunta));
+                questionTitle.setText(String.format("Pergunta #%d", pergunta));
+                String SQLQuestions = "SELECT * FROM `piproject`.`questions` WHERE questionID=" + elementIndex;
+                listID.remove(elementId);
+                ResultSet rsQr = stmt.executeQuery(SQLQuestions);
+                if (rsQr.next()) {
+                    questionText.setText(rsQr.getNString("question"));
+                    answer1.setText(rsQr.getNString("answerA"));
+                    answer2.setText(rsQr.getNString("answerB"));
+                    answer3.setText(rsQr.getNString("answerC"));
+                    answer4.setText(rsQr.getNString("answerD"));
+                }
+                stmt.close();
+                rsAnswer.close();
+                rsQr.close();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
         } else {
-                        JOptionPane.showMessageDialog(null, "QUIZ finalizado! Voltando a tela inicial");
-                        UIInicio frameuser = new UIInicio();
-                        frameuser.setVisible(true);
-                        this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "QUIZ finalizado! Voltando a tela inicial");
+            UIInicio frameuser = new UIInicio();
+            frameuser.setVisible(true);
+            this.setVisible(false);
+            String rank = "ferro";
+            if (pontos <= 49) {
+                rank = "Ferro";
+            } else if (pontos >= 50 && pontos <= 99) {
+                rank = "Ferro";
+            } else if (pontos >= 100 && pontos <= 150) {
+                rank = "Diamante";
+            }
+            String updatePoints = "UPDATE ``piproject`.`user_informations` set `userPoints` = " + pontos + ", `userRank` = '" + rank + "' where `userName` = '" + nome + "'";
+            try (Connection con = MySQL.getConnection();) {
+                PreparedStatement pstmt = con.prepareStatement(updatePoints);
+                pstmt.executeUpdate();
+                pstmt.close();
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_nextButtonActionPerformed
 
@@ -206,12 +268,12 @@ public class UIQuiz extends javax.swing.JFrame {
 
     private void answer4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answer4ActionPerformed
         // TODO add your handling code here:
-        resposta = "C";
+        resposta = "D";
     }//GEN-LAST:event_answer4ActionPerformed
 
     private void answer3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answer3ActionPerformed
         // TODO add your handling code here:
-        resposta = "D";
+        resposta = "C";
     }//GEN-LAST:event_answer3ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -249,13 +311,13 @@ public class UIQuiz extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UIQuiz().setVisible(true);
-                
+
             }
         });
     }
 
     private String nome = UILogin.userTextField.getText();
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton answer1;
