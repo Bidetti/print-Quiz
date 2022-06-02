@@ -62,9 +62,10 @@ public class UIInicio extends javax.swing.JFrame {
         inicioLabel.setAlignmentY(0.0F);
         getContentPane().add(inicioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 65, 1910, -1));
 
-        jLabel2.setFont(new java.awt.Font("Impact", 1, 48)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Impact", 1, 64)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 102, 102));
         jLabel2.setText("Informações:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 312, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 312, -1, -1));
 
         quizButton.setBackground(new java.awt.Color(51, 153, 255));
         quizButton.setFont(new java.awt.Font("Impact", 1, 75)); // NOI18N
@@ -150,8 +151,10 @@ public class UIInicio extends javax.swing.JFrame {
             String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
             ResultSet rs = stmt.executeQuery(SQLUser);
             if (rs.next()) {
+                double porcentagem = ((rs.getInt("userPoints")/150)*100);
                 rankInfo.setText(rs.getString("userRank"));
                 pointsInfo.setText("" + rs.getInt("userPoints"));
+                averageInfo.setText(porcentagem+"%");
             }
         } catch (Exception e) {
             System.err.println(e);

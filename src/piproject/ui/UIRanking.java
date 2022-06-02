@@ -156,11 +156,10 @@ public class UIRanking extends javax.swing.JFrame {
         try (Connection con = MySQL.getConnection();) {
 
             Statement stmt = con.createStatement();
-            String SQLTOP1 = "SELECT userName,userPoints from `user_informations` where userPoints order by userPoints desc limit 5;";
+            String SQLTOP1 = "SELECT userName,userPoints,userRank from `user_informations` where userPoints order by userPoints desc limit 5;";
             ResultSet rs = stmt.executeQuery(SQLTOP1);
             while (rs.next()) {
-                test[contador++] = rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos";
-
+                test[contador++] = rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos - " + rs.getNString("userRank");
             }
         } catch (Exception e) {
             System.out.println(e);

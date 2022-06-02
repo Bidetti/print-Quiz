@@ -204,10 +204,10 @@ public class UIQuiz extends javax.swing.JFrame {
                 ResultSet rsQr = stmt.executeQuery(SQLQuestions);
                 if (rsQr.next()) {
                     questionText.setText(rsQr.getNString("question"));
-                    answer1.setText(rsQr.getNString("answerA"));
-                    answer2.setText(rsQr.getNString("answerB"));
-                    answer3.setText(rsQr.getNString("answerC"));
-                    answer4.setText(rsQr.getNString("answerD"));
+                    answer1.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerA") + "</p></html>");
+                    answer2.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerB") + "</p></html>");
+                    answer3.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerC") + "</p></html>");
+                    answer4.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerD") + "</p></html>");
                 }
                 stmt.close();
                 rsAnswer.close();
@@ -222,13 +222,13 @@ public class UIQuiz extends javax.swing.JFrame {
             this.setVisible(false);
             String rank = "ferro";
             if (pontos <= 49) {
-                rank = "Ferro";
+                rank = "Ferro 🤍";
             } else if (pontos >= 50 && pontos <= 99) {
-                rank = "Ferro";
+                rank = "Ouro 💛";
             } else if (pontos >= 100 && pontos <= 150) {
-                rank = "Diamante";
+                rank = "Diamante 💙";
             }
-            String updatePoints = "UPDATE ``piproject`.`user_informations` set `userPoints` = " + pontos + ", `userRank` = '" + rank + "' where `userName` = '" + nome + "'";
+            String updatePoints = "UPDATE `piproject`.`user_informations` SET userPoints = " + pontos + ", userRank = '" + rank + "' where `userName` = '" + nome + "'";
             try (Connection con = MySQL.getConnection();) {
                 PreparedStatement pstmt = con.prepareStatement(updatePoints);
                 pstmt.executeUpdate();

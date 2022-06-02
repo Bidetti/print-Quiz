@@ -34,12 +34,10 @@ public class UIInicioADM extends javax.swing.JFrame {
         searchButton = new javax.swing.JButton();
         rankingButton = new javax.swing.JButton();
         disconnectButton = new javax.swing.JButton();
-        userOnTitle = new javax.swing.JLabel();
+        quizInfoTitle = new javax.swing.JLabel();
         usersTitle = new javax.swing.JLabel();
-        mediaTitle = new javax.swing.JLabel();
-        usersOnInfo = new javax.swing.JLabel();
+        quizInfo = new javax.swing.JLabel();
         usersInfo = new javax.swing.JLabel();
-        mediaInfo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         fundo = new javax.swing.JLabel();
 
@@ -58,7 +56,12 @@ public class UIInicioADM extends javax.swing.JFrame {
         searchButton.setBackground(new java.awt.Color(51, 153, 255));
         searchButton.setFont(new java.awt.Font("Impact", 1, 45)); // NOI18N
         searchButton.setText("Consultar usuários");
-        getContentPane().add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 251, 450, 110));
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 450, 110));
 
         rankingButton.setBackground(new java.awt.Color(51, 153, 255));
         rankingButton.setFont(new java.awt.Font("Impact", 1, 60)); // NOI18N
@@ -68,7 +71,7 @@ public class UIInicioADM extends javax.swing.JFrame {
                 rankingButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(rankingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 551, 450, 110));
+        getContentPane().add(rankingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 600, 450, 110));
 
         disconnectButton.setBackground(new java.awt.Color(255, 0, 51));
         disconnectButton.setFont(new java.awt.Font("Impact", 1, 36)); // NOI18N
@@ -80,33 +83,26 @@ public class UIInicioADM extends javax.swing.JFrame {
         });
         getContentPane().add(disconnectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 851, 283, 63));
 
-        userOnTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
-        userOnTitle.setText("Usuários online:");
-        getContentPane().add(userOnTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 426, -1, -1));
+        quizInfoTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
+        quizInfoTitle.setText("Quiz feitos até o momento:");
+        getContentPane().add(quizInfoTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 460, -1, -1));
 
         usersTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         usersTitle.setText("Usuários registrados:");
-        getContentPane().add(usersTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 568, -1, -1));
+        getContentPane().add(usersTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 570, -1, -1));
 
-        mediaTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
-        mediaTitle.setText("Média de acertos:");
-        getContentPane().add(mediaTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 717, -1, -1));
-
-        usersOnInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
-        usersOnInfo.setText("Falha no carregamento...");
-        getContentPane().add(usersOnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 500, -1, -1));
+        quizInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
+        quizInfo.setText("Falha no carregamento...");
+        getContentPane().add(quizInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 520, -1, -1));
 
         usersInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
         usersInfo.setText("Falha no carregamento...");
-        getContentPane().add(usersInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 648, -1, -1));
+        getContentPane().add(usersInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 630, -1, -1));
 
-        mediaInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
-        mediaInfo.setText("Falha no carregamento...");
-        getContentPane().add(mediaInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 793, -1, -1));
-
-        jLabel1.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
-        jLabel1.setText("Informações");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 312, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Impact", 1, 64)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel1.setText("Informações:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 370, -1, -1));
 
         fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
         fundo.setText("Informações");
@@ -143,6 +139,13 @@ public class UIInicioADM extends javax.swing.JFrame {
         frame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_rankingButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        UIConsultarUsers fram = new UIConsultarUsers();
+        fram.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,13 +191,11 @@ public class UIInicioADM extends javax.swing.JFrame {
     private javax.swing.JLabel fundo;
     public javax.swing.JLabel inicioLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel mediaInfo;
-    private javax.swing.JLabel mediaTitle;
+    private javax.swing.JLabel quizInfo;
+    private javax.swing.JLabel quizInfoTitle;
     private javax.swing.JButton rankingButton;
     private javax.swing.JButton searchButton;
-    private javax.swing.JLabel userOnTitle;
     private javax.swing.JLabel usersInfo;
-    private javax.swing.JLabel usersOnInfo;
     private javax.swing.JLabel usersTitle;
     // End of variables declaration//GEN-END:variables
 }
