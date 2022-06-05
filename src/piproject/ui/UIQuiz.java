@@ -220,18 +220,18 @@ public class UIQuiz extends javax.swing.JFrame {
             } else if (pontos >= 100 && pontos <= 150) {
                 rank = "Diamante";
             }
-            String updatePoints = "UPDATE `piproject`.`user_informations` SET userPoints = "+pontos+", userRank = \""+rank+"\" where `userName` =\""+ nome +"\"";
+            String updatePoints = "UPDATE `piproject`.`user_informations` SET userPoints = " + pontos + ", userRank = \"" + rank + "\" where `userName` =\"" + nome + "\"";
             try (Connection con = MySQL.getConnection();) {
                 PreparedStatement pstmt = con.prepareStatement(updatePoints);
                 pstmt.executeUpdate();
-                String SQLFinal = "SELECT * FROM `piproject`.`user_informations` where `userName` = '"+nome+"'";
+                String SQLFinal = "SELECT * FROM `piproject`.`user_informations` where `userName` = '" + nome + "'";
                 Statement stmt = con.createStatement();
                 ResultSet rsFinal = stmt.executeQuery(SQLFinal);
                 if (rsFinal.next()) {
                     int userID = rsFinal.getInt("userID");
                     String userRank = rsFinal.getNString("userRank");
                     int userPoints = rsFinal.getInt("userPoints");
-                    JOptionPane.showMessageDialog(null, String.format("Parabéns, %s! Você finalizou o QUIZ.\n \nInformações:\n  ID: %d\n    Rank: %s\n  Pontuação: %d", nome,userID, userRank, userPoints));
+                    JOptionPane.showMessageDialog(null, String.format("Parabéns, %s! Você finalizou o QUIZ.\n \nInformações:\n  ID: %d\n    Rank: %s\n  Pontuação: %d", nome, userID, userRank, userPoints));
                 }
                 stmt.close();
                 rsFinal.close();
@@ -240,7 +240,7 @@ public class UIQuiz extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e);
             }
-            
+
             UIInicio frameuser = new UIInicio();
             this.setVisible(false);
             frameuser.setVisible(true);

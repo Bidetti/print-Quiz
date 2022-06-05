@@ -29,11 +29,11 @@ public class UIInicioADM extends javax.swing.JFrame {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(SQLquiz);
             if (rs.next()) {
-                quizInfo.setText(""+rs.getInt("count(userStatus)"));
+                quizInfo.setText("" + rs.getInt("count(userStatus)"));
             }
             stmt.close();
             rs.close();
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.err.println(e);
         }
         try (Connection con = MySQL.getConnection();) {
@@ -41,11 +41,11 @@ public class UIInicioADM extends javax.swing.JFrame {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(SQLusers);
             if (rs.next()) {
-                usersInfo.setText(""+rs.getInt("count(userID)"));
+                usersInfo.setText("" + rs.getInt("count(userID)"));
             }
             stmt.close();
             rs.close();
-        }catch(Exception e) {
+        } catch (Exception e) {
             System.err.println(e);
         }
     }
@@ -137,9 +137,9 @@ public class UIInicioADM extends javax.swing.JFrame {
 
     private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
         // TODO add your handling code here:
-            UILogin frame = new UILogin();
-            frame.setVisible(true);
-            this.setVisible(false);
+        UILogin frame = new UILogin();
+        frame.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_disconnectButtonActionPerformed
 
     private void rankingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingButtonActionPerformed

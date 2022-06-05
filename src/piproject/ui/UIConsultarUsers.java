@@ -5,13 +5,13 @@
 package piproject.ui;
 
 import piproject.mysql.MySQL;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author rodri
  */
 public class UIConsultarUsers extends javax.swing.JFrame {
@@ -145,7 +145,7 @@ public class UIConsultarUsers extends javax.swing.JFrame {
             String SQLUser = "SELECT userName, userRank, userPoints, userPermission FROM `piproject`.`user_informations` WHERE userID=" + IDTextField.getText();
             ResultSet rs = stmt.executeQuery(SQLUser);
 
-            if (rs.next()){
+            if (rs.next()) {
                 AlterarNomeField.setVisible(true);
                 changeNameButton.setVisible(true);
                 deleteUserButton.setVisible(true);
@@ -157,14 +157,13 @@ public class UIConsultarUsers extends javax.swing.JFrame {
                 rankLabel.setText("Rank: " + rank);
                 pontosLabel.setText("Pontuação: " + pontos);
                 permissionLabel.setText("Permissão: " + perm);
-                
-            }else 
-            {
+
+            } else {
                 JOptionPane.showMessageDialog(null, "ID Desconhecido!");
             }
-            
+
         } catch (Exception e) {
-                    System.err.println(e);
+            System.err.println(e);
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -172,12 +171,12 @@ public class UIConsultarUsers extends javax.swing.JFrame {
         // TODO add your handling code here:
         try (Connection con = MySQL.getConnection();) {
             Statement stmt = con.createStatement();
-            String SQLUpdate = "UPDATE `piproject`.`user_informations` SET `userName` ='" + AlterarNomeField.getText() +"' WHERE `userID` =" + IDTextField.getText() + ";";
+            String SQLUpdate = "UPDATE `piproject`.`user_informations` SET `userName` ='" + AlterarNomeField.getText() + "' WHERE `userID` =" + IDTextField.getText() + ";";
             stmt.executeUpdate(SQLUpdate);
             JOptionPane.showMessageDialog(null, "Usuário " + IDTextField.getText() + " teve o nome alterado!");
-            
+
         } catch (Exception e) {
-                    System.err.println(e);
+            System.err.println(e);
         }
     }//GEN-LAST:event_changeNameButtonActionPerformed
 
@@ -189,9 +188,9 @@ public class UIConsultarUsers extends javax.swing.JFrame {
             stmt.executeUpdate(SQLDelete);
             JOptionPane.showMessageDialog(null, "Usuário " + IDTextField.getText() + " foi deletado!");
         } catch (Exception e) {
-                    System.err.println(e);
+            System.err.println(e);
         }
-            
+
     }//GEN-LAST:event_deleteUserButtonActionPerformed
 
     /**
@@ -201,7 +200,7 @@ public class UIConsultarUsers extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

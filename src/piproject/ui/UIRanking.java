@@ -189,7 +189,7 @@ public class UIRanking extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UIRanking().setVisible(true);
-                
+
             }
         });
     }
