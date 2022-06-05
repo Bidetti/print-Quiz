@@ -25,11 +25,26 @@ public class UIInicioADM extends javax.swing.JFrame {
         inicioLabel.setText("ADM - " + nome);
         try (Connection con = MySQL.getConnection();) {
             String SQLquiz = "select count(userStatus) from `piproject`.`user_informations` where userStatus = \"true\"";
+            String SQLusers = "select count(userID) from `piproject`.`user_informations`";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(SQLquiz);
             if (rs.next()) {
                 quizInfo.setText(""+rs.getInt("count(userStatus)"));
             }
+            stmt.close();
+            rs.close();
+        }catch(Exception e) {
+            System.err.println(e);
+        }
+        try (Connection con = MySQL.getConnection();) {
+            String SQLusers = "select count(userID) from `piproject`.`user_informations`";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(SQLusers);
+            if (rs.next()) {
+                usersInfo.setText(""+rs.getInt("count(userID)"));
+            }
+            stmt.close();
+            rs.close();
         }catch(Exception e) {
             System.err.println(e);
         }

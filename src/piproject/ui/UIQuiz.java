@@ -46,11 +46,11 @@ public class UIQuiz extends javax.swing.JFrame {
             listID.remove(elementId);
             ResultSet rsQr = stmt.executeQuery(SQLQuestions);
             if (rsQr.next()) {
-                questionText.setText(rsQr.getNString("question"));
-                answer1.setText(rsQr.getNString("answerA"));
-                answer2.setText(rsQr.getNString("answerB"));
-                answer3.setText(rsQr.getNString("answerC"));
-                answer4.setText(rsQr.getNString("answerD"));
+                questionText.setText("<html><p style=\"width:1400px\">" + rsQr.getNString("question") + "</html>");
+                answer1.setText("<html><p style=\"width:700px\">" + rsQr.getNString("answerA") + "</html>");
+                answer2.setText("<html><p style=\"width:700px\">" + rsQr.getNString("answerB") + "</html>");
+                answer3.setText("<html><p style=\"width:700px\">" + rsQr.getNString("answerC") + "</html>");
+                answer4.setText("<html><p style=\"width:700px\">" + rsQr.getNString("answerD") + "</html>");
             }
             stmt.close();
             rsQr.close();
@@ -92,7 +92,7 @@ public class UIQuiz extends javax.swing.JFrame {
         questionTitle.setAlignmentY(0.0F);
         questionTitle.setAutoscrolls(true);
         questionTitle.setPreferredSize(new java.awt.Dimension(934, 186));
-        getContentPane().add(questionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 934, 186));
+        getContentPane().add(questionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, -40, 934, 186));
 
         progressQuiz.setForeground(new java.awt.Color(102, 255, 51));
         progressQuiz.setMaximum(15);
@@ -112,7 +112,7 @@ public class UIQuiz extends javax.swing.JFrame {
         questionText.setToolTipText("");
         questionText.setAlignmentY(0.0F);
         questionText.setPreferredSize(new java.awt.Dimension(1444, 118));
-        getContentPane().add(questionText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 1444, 118));
+        getContentPane().add(questionText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 138, 1444, 230));
 
         answer3.setText("Erro ao carregar a resposta");
         answer3.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +120,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 answer3ActionPerformed(evt);
             }
         });
-        getContentPane().add(answer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 450, 640, 120));
+        getContentPane().add(answer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 400, 750, 225));
 
         answer1.setText("Erro ao carregar a resposta");
         answer1.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +128,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 answer1ActionPerformed(evt);
             }
         });
-        getContentPane().add(answer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 640, 120));
+        getContentPane().add(answer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 750, 225));
 
         answer2.setText("Erro ao carregar a resposta");
         answer2.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +136,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 answer2ActionPerformed(evt);
             }
         });
-        getContentPane().add(answer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 670, 640, 120));
+        getContentPane().add(answer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 650, 750, 225));
 
         answer4.setText("Erro ao carregar a resposta");
         answer4.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +144,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 answer4ActionPerformed(evt);
             }
         });
-        getContentPane().add(answer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 670, 640, 120));
+        getContentPane().add(answer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 650, 750, 225));
 
         nextButton.setBackground(new java.awt.Color(51, 153, 255));
         nextButton.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
@@ -184,7 +184,7 @@ public class UIQuiz extends javax.swing.JFrame {
                 String SQLAnswer = "SELECT `isCorrect` FROM `piproject`.`questions` WHERE questionID=" + antigoIndex;
                 ResultSet rsAnswer = stmt.executeQuery(SQLAnswer);
                 if (rsAnswer.next()) {
-                    if (resposta.equals(rsAnswer.getNString("isCorrect").replaceAll("\"", ""))) {
+                    if (resposta.equals(rsAnswer.getNString("isCorrect"))) {
                         pontos = pontos + 10;
                     }
                 }
@@ -199,11 +199,11 @@ public class UIQuiz extends javax.swing.JFrame {
                 listID.remove(elementId);
                 ResultSet rsQr = stmt.executeQuery(SQLQuestions);
                 if (rsQr.next()) {
-                    questionText.setText("<html><p style=\"width:600px\">" + rsQr.getNString("question") + "</html>");
-                    answer1.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerA") + "</html>");
-                    answer2.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerB") + "</html>");
-                    answer3.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerC") + "</html>");
-                    answer4.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerD") + "</html>");
+                    questionText.setText("<html><p style=\"width:1400px\">" + rsQr.getNString("question") + "</html>");
+                    answer1.setText("<html><p style=\"width:700px\">" + rsQr.getNString("answerA") + "</html>");
+                    answer2.setText("<html><p style=\"width:700px\">" + rsQr.getNString("answerB") + "</html>");
+                    answer3.setText("<html><p style=\"width:700px\">" + rsQr.getNString("answerC") + "</html>");
+                    answer4.setText("<html><p style=\"width:700px\">" + rsQr.getNString("answerD") + "</html>");
                 }
                 stmt.close();
                 rsAnswer.close();
@@ -212,8 +212,6 @@ public class UIQuiz extends javax.swing.JFrame {
                 System.err.println(e);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "QUIZ finalizado! Voltando a tela inicial");
-            UIInicio frameuser = new UIInicio();
             String rank = "ferro";
             if (pontos <= 49) {
                 rank = "Ferro";
@@ -226,13 +224,26 @@ public class UIQuiz extends javax.swing.JFrame {
             try (Connection con = MySQL.getConnection();) {
                 PreparedStatement pstmt = con.prepareStatement(updatePoints);
                 pstmt.executeUpdate();
+                String SQLFinal = "SELECT * FROM `piproject`.`user_informations` where `userName` = '"+nome+"'";
+                Statement stmt = con.createStatement();
+                ResultSet rsFinal = stmt.executeQuery(SQLFinal);
+                if (rsFinal.next()) {
+                    int userID = rsFinal.getInt("userID");
+                    String userRank = rsFinal.getNString("userRank");
+                    int userPoints = rsFinal.getInt("userPoints");
+                    JOptionPane.showMessageDialog(null, String.format("Parabéns, %s! Você finalizou o QUIZ.\n \nInformações:\n  ID: %d\n    Rank: %s\n  Pontuação: %d", nome,userID, userRank, userPoints));
+                }
+                stmt.close();
+                rsFinal.close();
                 pstmt.close();
                 con.close();
             } catch (Exception e) {
                 System.out.println(e);
             }
-            frameuser.setVisible(true);
+            
+            UIInicio frameuser = new UIInicio();
             this.setVisible(false);
+            frameuser.setVisible(true);
         }
     }//GEN-LAST:event_nextButtonActionPerformed
 

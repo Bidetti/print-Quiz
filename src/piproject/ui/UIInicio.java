@@ -26,13 +26,14 @@ public class UIInicio extends javax.swing.JFrame {
         //this.setLocationRelativeTo(null);
         try (Connection con = MySQL.getConnection();) {
             Statement stmt = con.createStatement();
-            String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
+            String SQLUser = "SELECT * FROM (SELECT userName, userPoints, userRank, ROW_NUMBER() OVER(ORDER BY userPoints DESC, userId) AS 'rank' FROM `piproject`.`user_informations`) AS rank_query WHERE userName ='" + UILogin.userTextField.getText() + "'";
             ResultSet rs = stmt.executeQuery(SQLUser);
             if (rs.next()) {
                 double porcentagem = (((double)rs.getInt("userPoints")/150)*100);
                 rankInfo.setText(rs.getString("userRank"));
                 pointsInfo.setText("" + rs.getInt("userPoints"));
                 averageInfo.setText(String.format("%.0f",porcentagem)+"%");
+                rankingInfo.setText("#"+ rs.getInt("rank"));
             }
         } catch (Exception e) {
             System.err.println(e);
@@ -178,7 +179,7 @@ public class UIInicio extends javax.swing.JFrame {
                     pstmt.close();
                     con.close();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Você já realizou um QUIZ anteriormente, se suas informações não estiver aparecendo contate um administrador.");
+                    JOptionPane.showMessageDialog(null, "Você já realizou um QUIZ anteriormente, se suas informações não estiverem aparecendo contate um administrador.");
                 }
             }
         } catch (Exception e) {

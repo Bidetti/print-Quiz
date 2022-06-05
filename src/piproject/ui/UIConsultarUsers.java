@@ -22,6 +22,9 @@ public class UIConsultarUsers extends javax.swing.JFrame {
     public UIConsultarUsers() {
         initComponents();
         this.setLocationRelativeTo(null);
+        AlterarNomeField.setVisible(false);
+        changeNameButton.setVisible(false);
+        deleteUserButton.setVisible(false);
     }
 
     /**
@@ -42,14 +45,15 @@ public class UIConsultarUsers extends javax.swing.JFrame {
         changeNameButton = new javax.swing.JButton();
         deleteUserButton = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
-        porcentagemLabel = new javax.swing.JLabel();
+        permissionLabel = new javax.swing.JLabel();
         AlterarNomeField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        backButton.setBackground(new java.awt.Color(51, 153, 255));
+        backButton.setBackground(new java.awt.Color(255, 51, 51));
         backButton.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         backButton.setText("Voltar");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -57,7 +61,7 @@ public class UIConsultarUsers extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 950, 317, 54));
+        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1500, 900, 325, 80));
 
         jLabel11.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
         jLabel11.setText("Consulta de Usuários - ADM");
@@ -65,19 +69,19 @@ public class UIConsultarUsers extends javax.swing.JFrame {
 
         IDTextField.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         IDTextField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Digite o ID do usuário para ser consultado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dubai", 1, 14))); // NOI18N
-        getContentPane().add(IDTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 310, 640, 80));
+        getContentPane().add(IDTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 640, 80));
 
         userLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        userLabel.setText("User: ?");
-        getContentPane().add(userLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 530, -1, -1));
+        userLabel.setText("User: Erro ao carregar...");
+        getContentPane().add(userLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 530, 630, -1));
 
         rankLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        rankLabel.setText("Rank: ?");
-        getContentPane().add(rankLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 530, -1, -1));
+        rankLabel.setText("Rank: Erro ao carregar...");
+        getContentPane().add(rankLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 530, 630, -1));
 
         pontosLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        pontosLabel.setText("Pontuação: ?");
-        getContentPane().add(pontosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 680, -1, -1));
+        pontosLabel.setText("Pontuação: Erro ao carregar...");
+        getContentPane().add(pontosLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 670, 630, -1));
 
         changeNameButton.setBackground(new java.awt.Color(51, 153, 255));
         changeNameButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -87,7 +91,7 @@ public class UIConsultarUsers extends javax.swing.JFrame {
                 changeNameButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(changeNameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 870, 120, 40));
+        getContentPane().add(changeNameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 780, 200, 80));
 
         deleteUserButton.setBackground(new java.awt.Color(51, 153, 255));
         deleteUserButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -97,7 +101,7 @@ public class UIConsultarUsers extends javax.swing.JFrame {
                 deleteUserButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(deleteUserButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 870, 130, 40));
+        getContentPane().add(deleteUserButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 780, 200, 80));
 
         searchButton.setBackground(new java.awt.Color(51, 153, 255));
         searchButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -107,15 +111,19 @@ public class UIConsultarUsers extends javax.swing.JFrame {
                 searchButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 420, -1, 50));
+        getContentPane().add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 310, 280, 80));
 
-        porcentagemLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        porcentagemLabel.setText("Porcentagem De Acertos: ?");
-        getContentPane().add(porcentagemLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 680, -1, -1));
+        permissionLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        permissionLabel.setText("Permissão: Erro ao carregar...");
+        getContentPane().add(permissionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 680, 630, -1));
 
         AlterarNomeField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         AlterarNomeField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Digite o nome para ser trocado:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 14))); // NOI18N
-        getContentPane().add(AlterarNomeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 780, 390, 60));
+        getContentPane().add(AlterarNomeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 780, 640, 80));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
+        jLabel1.setText("Informações:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, -1, -1));
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
         getContentPane().add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -134,16 +142,21 @@ public class UIConsultarUsers extends javax.swing.JFrame {
         // TODO add your handling code here:
         try (Connection con = MySQL.getConnection();) {
             Statement stmt = con.createStatement();
-            String SQLUser = "SELECT userName, userRank, userPoints FROM `piproject`.`user_informations` WHERE userID=" + IDTextField.getText();
+            String SQLUser = "SELECT userName, userRank, userPoints, userPermission FROM `piproject`.`user_informations` WHERE userID=" + IDTextField.getText();
             ResultSet rs = stmt.executeQuery(SQLUser);
 
             if (rs.next()){
+                AlterarNomeField.setVisible(true);
+                changeNameButton.setVisible(true);
+                deleteUserButton.setVisible(true);
                 String nome_user = rs.getString("userName");
                 String rank = rs.getString("userRank");
                 String pontos = rs.getString("userPoints");
+                String perm = rs.getNString("userPermission");
                 userLabel.setText("User: " + nome_user);
                 rankLabel.setText("Rank: " + rank);
                 pontosLabel.setText("Pontuação: " + pontos);
+                permissionLabel.setText("Permissão: " + perm);
                 
             }else 
             {
@@ -223,9 +236,10 @@ public class UIConsultarUsers extends javax.swing.JFrame {
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JButton changeNameButton;
     private javax.swing.JButton deleteUserButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel permissionLabel;
     private javax.swing.JLabel pontosLabel;
-    private javax.swing.JLabel porcentagemLabel;
     private javax.swing.JLabel rankLabel;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel userLabel;
