@@ -22,6 +22,21 @@ public class UIInicio extends javax.swing.JFrame {
      */
     public UIInicio() {
         initComponents();
+        inicioLabel.setText("INICIO - " + nome);
+        //this.setLocationRelativeTo(null);
+        try (Connection con = MySQL.getConnection();) {
+            Statement stmt = con.createStatement();
+            String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
+            ResultSet rs = stmt.executeQuery(SQLUser);
+            if (rs.next()) {
+                double porcentagem = (((double)rs.getInt("userPoints")/150)*100);
+                rankInfo.setText(rs.getString("userRank"));
+                pointsInfo.setText("" + rs.getInt("userPoints"));
+                averageInfo.setText(String.format("%.0f",porcentagem)+"%");
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
     /**
@@ -49,11 +64,6 @@ public class UIInicio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         inicioLabel.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
@@ -65,7 +75,7 @@ public class UIInicio extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Impact", 1, 64)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 102, 102));
         jLabel2.setText("Informações:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 312, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 300, -1, -1));
 
         quizButton.setBackground(new java.awt.Color(51, 153, 255));
         quizButton.setFont(new java.awt.Font("Impact", 1, 75)); // NOI18N
@@ -75,7 +85,7 @@ public class UIInicio extends javax.swing.JFrame {
                 quizButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(quizButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 292, 553, 203));
+        getContentPane().add(quizButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 550, 200));
 
         rankingButton.setBackground(new java.awt.Color(51, 153, 255));
         rankingButton.setFont(new java.awt.Font("Impact", 1, 60)); // NOI18N
@@ -85,7 +95,7 @@ public class UIInicio extends javax.swing.JFrame {
                 rankingButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(rankingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 615, 423, 107));
+        getContentPane().add(rankingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 550, 400, 100));
 
         disconnectButton.setBackground(new java.awt.Color(255, 0, 51));
         disconnectButton.setFont(new java.awt.Font("Impact", 1, 36)); // NOI18N
@@ -95,39 +105,39 @@ public class UIInicio extends javax.swing.JFrame {
                 disconnectButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(disconnectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 851, 283, 63));
+        getContentPane().add(disconnectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 750, 250, 75));
 
         rankTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         rankTitle.setText("Rank:");
-        getContentPane().add(rankTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 426, -1, -1));
+        getContentPane().add(rankTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 400, -1, -1));
 
         pointsTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         pointsTitle.setText("Pontuação:");
-        getContentPane().add(pointsTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 568, -1, -1));
+        getContentPane().add(pointsTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 500, -1, -1));
 
         averageTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         averageTitle.setText("Porcentagem de acertos:");
-        getContentPane().add(averageTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 717, -1, -1));
+        getContentPane().add(averageTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 600, -1, -1));
 
         rankingTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         rankingTitle.setText("Classificação:");
-        getContentPane().add(rankingTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 870, -1, -1));
+        getContentPane().add(rankingTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 700, -1, -1));
 
         rankInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
         rankInfo.setText("Falha no carregamento...");
-        getContentPane().add(rankInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 500, -1, -1));
+        getContentPane().add(rankInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 450, -1, -1));
 
         pointsInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
         pointsInfo.setText("Falha no carregamento...");
-        getContentPane().add(pointsInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 648, -1, -1));
+        getContentPane().add(pointsInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 550, -1, -1));
 
         averageInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
         averageInfo.setText("Falha no carregamento...");
-        getContentPane().add(averageInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 800, -1, -1));
+        getContentPane().add(averageInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 650, -1, -1));
 
         rankingInfo.setFont(new java.awt.Font("Impact", 0, 30)); // NOI18N
         rankingInfo.setText("Falha no carregamento...");
-        getContentPane().add(rankingInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 950, -1, -1));
+        getContentPane().add(rankingInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 750, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
@@ -141,25 +151,6 @@ public class UIInicio extends javax.swing.JFrame {
         frame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_rankingButtonActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        inicioLabel.setText("INICIO - " + nome);
-        this.setLocationRelativeTo(null);
-        try (Connection con = MySQL.getConnection();) {
-            Statement stmt = con.createStatement();
-            String SQLUser = "SELECT * FROM `piproject`.`user_informations` WHERE userName='" + UILogin.userTextField.getText() + "'";
-            ResultSet rs = stmt.executeQuery(SQLUser);
-            if (rs.next()) {
-                double porcentagem = ((rs.getInt("userPoints")/150)*100);
-                rankInfo.setText(rs.getString("userRank"));
-                pointsInfo.setText("" + rs.getInt("userPoints"));
-                averageInfo.setText(porcentagem+"%");
-            }
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-    }//GEN-LAST:event_formWindowOpened
 
     private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
         // TODO add your handling code here:

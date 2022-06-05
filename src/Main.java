@@ -4,13 +4,8 @@
  */
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 import piproject.mysql.MySQL;
 import piproject.ui.UILogin;
-import piproject.ui.UIQuiz;
 /**
  * @author rafae
  */

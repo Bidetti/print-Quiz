@@ -8,6 +8,8 @@ import piproject.mysql.MySQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * @author rafae
@@ -19,6 +21,18 @@ public class UIInicioADM extends javax.swing.JFrame {
      */
     public UIInicioADM() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        inicioLabel.setText("ADM - " + nome);
+        try (Connection con = MySQL.getConnection();) {
+            String SQLquiz = "select count(userStatus) from `piproject`.`user_informations` where userStatus = \"true\"";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(SQLquiz);
+            if (rs.next()) {
+                quizInfo.setText(""+rs.getInt("count(userStatus)"));
+            }
+        }catch(Exception e) {
+            System.err.println(e);
+        }
     }
 
     /**
@@ -42,11 +56,6 @@ public class UIInicioADM extends javax.swing.JFrame {
         fundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         inicioLabel.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
@@ -61,7 +70,7 @@ public class UIInicioADM extends javax.swing.JFrame {
                 searchButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 450, 110));
+        getContentPane().add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 450, 110));
 
         rankingButton.setBackground(new java.awt.Color(51, 153, 255));
         rankingButton.setFont(new java.awt.Font("Impact", 1, 60)); // NOI18N
@@ -71,7 +80,7 @@ public class UIInicioADM extends javax.swing.JFrame {
                 rankingButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(rankingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 600, 450, 110));
+        getContentPane().add(rankingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 540, 450, 110));
 
         disconnectButton.setBackground(new java.awt.Color(255, 0, 51));
         disconnectButton.setFont(new java.awt.Font("Impact", 1, 36)); // NOI18N
@@ -81,7 +90,7 @@ public class UIInicioADM extends javax.swing.JFrame {
                 disconnectButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(disconnectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 851, 283, 63));
+        getContentPane().add(disconnectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 740, 283, 63));
 
         quizInfoTitle.setFont(new java.awt.Font("Impact", 1, 40)); // NOI18N
         quizInfoTitle.setText("Quiz feitos até o momento:");
@@ -111,26 +120,11 @@ public class UIInicioADM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        inicioLabel.setText("ADM - " + nome);
-        this.setLocationRelativeTo(null);
-    }//GEN-LAST:event_formWindowOpened
-
     private void disconnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectButtonActionPerformed
         // TODO add your handling code here:
-        try (Connection con = MySQL.getConnection();) {
-            String updateStatus = "UPDATE `piproject`.`user_informations` set `userStatus` = 'false' where `userName`= '" + nome + "'";
-            PreparedStatement pstmt = con.prepareStatement(updateStatus);
             UILogin frame = new UILogin();
-            pstmt.executeUpdate();
             frame.setVisible(true);
             this.setVisible(false);
-            pstmt.close();
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }//GEN-LAST:event_disconnectButtonActionPerformed
 
     private void rankingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingButtonActionPerformed

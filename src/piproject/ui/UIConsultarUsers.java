@@ -21,6 +21,7 @@ public class UIConsultarUsers extends javax.swing.JFrame {
      */
     public UIConsultarUsers() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -40,8 +41,8 @@ public class UIConsultarUsers extends javax.swing.JFrame {
         pontosLabel = new javax.swing.JLabel();
         changeNameButton = new javax.swing.JButton();
         deleteUserButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        searchButton = new javax.swing.JButton();
+        porcentagemLabel = new javax.swing.JLabel();
         AlterarNomeField = new javax.swing.JTextField();
         backgroundLabel = new javax.swing.JLabel();
 
@@ -96,29 +97,24 @@ public class UIConsultarUsers extends javax.swing.JFrame {
                 deleteUserButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(deleteUserButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 870, 120, 40));
+        getContentPane().add(deleteUserButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 870, 130, 40));
 
-        jButton1.setBackground(new java.awt.Color(51, 153, 255));
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton1.setText("Buscar Usuário");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(51, 153, 255));
+        searchButton.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        searchButton.setText("Buscar Usuário");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 420, -1, 50));
+        getContentPane().add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 420, -1, 50));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel3.setText("Porcentagem De Acertos: ?");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 680, -1, -1));
+        porcentagemLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        porcentagemLabel.setText("Porcentagem De Acertos: ?");
+        getContentPane().add(porcentagemLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 680, -1, -1));
 
         AlterarNomeField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         AlterarNomeField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Digite o nome para ser trocado:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 14))); // NOI18N
-        AlterarNomeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AlterarNomeFieldActionPerformed(evt);
-            }
-        });
         getContentPane().add(AlterarNomeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 780, 390, 60));
 
         backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
@@ -134,7 +130,7 @@ public class UIConsultarUsers extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         try (Connection con = MySQL.getConnection();) {
             Statement stmt = con.createStatement();
@@ -157,11 +153,7 @@ public class UIConsultarUsers extends javax.swing.JFrame {
         } catch (Exception e) {
                     System.err.println(e);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void AlterarNomeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarNomeFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AlterarNomeFieldActionPerformed
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     private void changeNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeNameButtonActionPerformed
         // TODO add your handling code here:
@@ -231,11 +223,11 @@ public class UIConsultarUsers extends javax.swing.JFrame {
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JButton changeNameButton;
     private javax.swing.JButton deleteUserButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel pontosLabel;
+    private javax.swing.JLabel porcentagemLabel;
     private javax.swing.JLabel rankLabel;
+    private javax.swing.JButton searchButton;
     private javax.swing.JLabel userLabel;
     // End of variables declaration//GEN-END:variables
 }

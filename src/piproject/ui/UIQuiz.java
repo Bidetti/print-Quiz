@@ -35,6 +35,7 @@ public class UIQuiz extends javax.swing.JFrame {
      */
     public UIQuiz() {
         initComponents();
+        this.setLocationRelativeTo(null);
         listID.addAll(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
         try (Connection con = MySQL.getConnection();) {
             Statement stmt = con.createStatement();
@@ -83,11 +84,6 @@ public class UIQuiz extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(1920, 1080));
         setSize(new java.awt.Dimension(1920, 1080));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         questionTitle.setFont(new java.awt.Font("Segoe UI", 3, 96)); // NOI18N
@@ -203,11 +199,11 @@ public class UIQuiz extends javax.swing.JFrame {
                 listID.remove(elementId);
                 ResultSet rsQr = stmt.executeQuery(SQLQuestions);
                 if (rsQr.next()) {
-                    questionText.setText(rsQr.getNString("question"));
-                    answer1.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerA") + "</p></html>");
-                    answer2.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerB") + "</p></html>");
-                    answer3.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerC") + "</p></html>");
-                    answer4.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerD") + "</p></html>");
+                    questionText.setText("<html><p style=\"width:600px\">" + rsQr.getNString("question") + "</html>");
+                    answer1.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerA") + "</html>");
+                    answer2.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerB") + "</html>");
+                    answer3.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerC") + "</html>");
+                    answer4.setText("<html><p style=\"width:600px\">" + rsQr.getNString("answerD") + "</html>");
                 }
                 stmt.close();
                 rsAnswer.close();
@@ -218,17 +214,15 @@ public class UIQuiz extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "QUIZ finalizado! Voltando a tela inicial");
             UIInicio frameuser = new UIInicio();
-            frameuser.setVisible(true);
-            this.setVisible(false);
             String rank = "ferro";
             if (pontos <= 49) {
-                rank = "Ferro 🤍";
+                rank = "Ferro";
             } else if (pontos >= 50 && pontos <= 99) {
-                rank = "Ouro 💛";
+                rank = "Ouro";
             } else if (pontos >= 100 && pontos <= 150) {
-                rank = "Diamante 💙";
+                rank = "Diamante";
             }
-            String updatePoints = "UPDATE `piproject`.`user_informations` SET userPoints = " + pontos + ", userRank = '" + rank + "' where `userName` = '" + nome + "'";
+            String updatePoints = "UPDATE `piproject`.`user_informations` SET userPoints = "+pontos+", userRank = \""+rank+"\" where `userName` =\""+ nome +"\"";
             try (Connection con = MySQL.getConnection();) {
                 PreparedStatement pstmt = con.prepareStatement(updatePoints);
                 pstmt.executeUpdate();
@@ -237,6 +231,8 @@ public class UIQuiz extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e);
             }
+            frameuser.setVisible(true);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_nextButtonActionPerformed
 
@@ -276,10 +272,6 @@ public class UIQuiz extends javax.swing.JFrame {
         resposta = "C";
     }//GEN-LAST:event_answer3ActionPerformed
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowActivated
-
     /**
      * @param args the command line arguments
      */
@@ -311,7 +303,6 @@ public class UIQuiz extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UIQuiz().setVisible(true);
-
             }
         });
     }

@@ -21,6 +21,25 @@ public class UIRanking extends javax.swing.JFrame {
      */
     public UIRanking() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        String[] test = new String[5];
+        int contador = 0;
+        try (Connection con = MySQL.getConnection();) {
+
+            Statement stmt = con.createStatement();
+            String SQLTOP1 = "SELECT userName,userPoints,userRank from `user_informations` where userPoints order by userPoints desc limit 5;";
+            ResultSet rs = stmt.executeQuery(SQLTOP1);
+            while (rs.next()) {
+                test[contador++] = rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos - " + rs.getNString("userRank");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        top1.setText(test[0]);
+        top2.setText(test[1]);
+        top3.setText(test[2]);
+        top4.setText(test[3]);
+        top5.setText(test[4]);
     }
 
     /**
@@ -49,15 +68,6 @@ public class UIRanking extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ranking");
         setMinimumSize(new java.awt.Dimension(1920, 1080));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Impact", 3, 96)); // NOI18N
@@ -76,43 +86,47 @@ public class UIRanking extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel2.setText("1.");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 257, -1, -1));
+        jLabel2.setPreferredSize(new java.awt.Dimension(42, 62));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
 
         top1.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top1.setText("Erro ao carregar usuário...");
-        getContentPane().add(top1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 257, 570, -1));
+        getContentPane().add(top1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 1000, -1));
 
         top2.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top2.setText("Erro ao carregar usuário...");
-        getContentPane().add(top2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 386, 570, -1));
+        getContentPane().add(top2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 1000, -1));
 
         jLabel3.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel3.setText("2.");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 386, -1, -1));
+        jLabel3.setPreferredSize(new java.awt.Dimension(42, 62));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel4.setText("3.");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 501, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, -1, -1));
 
         top3.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top3.setText("Erro ao carregar usuário...");
-        getContentPane().add(top3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 501, 570, -1));
+        getContentPane().add(top3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 1000, -1));
 
         jLabel5.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel5.setText("4.");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 616, -1, -1));
+        jLabel5.setPreferredSize(new java.awt.Dimension(42, 62));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 550, -1, -1));
 
         top4.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top4.setText("Erro ao carregar usuário...");
-        getContentPane().add(top4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 616, 570, -1));
+        getContentPane().add(top4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 550, 1000, -1));
 
         jLabel6.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         jLabel6.setText("5.");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 731, -1, -1));
+        jLabel6.setRequestFocusEnabled(false);
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 650, -1, -1));
 
         top5.setFont(new java.awt.Font("Impact", 1, 50)); // NOI18N
         top5.setText("Erro ao carregar usuário...");
-        getContentPane().add(top5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 731, 570, -1));
+        getContentPane().add(top5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 650, 1000, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/piproject/api/back.jpg"))); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
@@ -143,33 +157,6 @@ public class UIRanking extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_backButtonActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        this.setLocationRelativeTo(null);
-    }//GEN-LAST:event_formWindowOpened
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-        String[] test = new String[5];
-        int contador = 0;
-        try (Connection con = MySQL.getConnection();) {
-
-            Statement stmt = con.createStatement();
-            String SQLTOP1 = "SELECT userName,userPoints,userRank from `user_informations` where userPoints order by userPoints desc limit 5;";
-            ResultSet rs = stmt.executeQuery(SQLTOP1);
-            while (rs.next()) {
-                test[contador++] = rs.getNString("userName") + " - " + rs.getInt("userPoints") + " pontos - " + rs.getNString("userRank");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        top1.setText(test[0]);
-        top2.setText(test[1]);
-        top3.setText(test[2]);
-        top4.setText(test[3]);
-        top5.setText(test[4]);
-    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -202,6 +189,7 @@ public class UIRanking extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UIRanking().setVisible(true);
+                
             }
         });
     }
