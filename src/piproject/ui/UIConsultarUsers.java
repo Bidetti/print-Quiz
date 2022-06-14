@@ -176,6 +176,7 @@ public class UIConsultarUsers extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Usuário " + IDTextField.getText() + " teve o nome alterado!");
 
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Nome já existente em nosso banco de dados!");
             System.err.println(e);
         }
     }//GEN-LAST:event_changeNameButtonActionPerformed

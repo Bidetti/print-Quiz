@@ -231,7 +231,7 @@ public class UIQuiz extends javax.swing.JFrame {
                     int userID = rsFinal.getInt("userID");
                     String userRank = rsFinal.getNString("userRank");
                     int userPoints = rsFinal.getInt("userPoints");
-                    JOptionPane.showMessageDialog(null, String.format("Parabéns, %s! Você finalizou o QUIZ.\n \nInformações:\n  ID: %d\n    Rank: %s\n  Pontuação: %d", nome, userID, userRank, userPoints));
+                    JOptionPane.showMessageDialog(null, String.format("Parabéns, %s! Você finalizou o QUIZ.\n \nInformações:\n  ID: %d\n  Rank: %s\n  Pontuação: %d", nome, userID, userRank, userPoints));
                 }
                 stmt.close();
                 rsFinal.close();
