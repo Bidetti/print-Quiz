@@ -7,9 +7,9 @@ Projeto Integrador Interdiciplinar - Print('Quiz'): Um jogo de questionários qu
 
 📋 Pré-requisitos
 
-Para instalar esta aplicação, você necessita possuir java instalado em sua área de trabalho.
+Para instalar esta aplicação, você necessita possuir java e algum serviço de banco de dados instalados em sua área de trabalho.
 
-Para conseguir realiar o Quiz de uma maneira eficaz, conceitos básicos sobre Programação deverão ser previamenete conhecidos, pois assim, o usuário poderá atingir uma maior pontuação no questionário.
+Para conseguir realizar o Quiz de uma maneira eficaz, conceitos básicos sobre Programação deverão ser previamenete conhecidos, pois assim, o usuário poderá atingir uma maior pontuação no questionário.
 
 
 🔧 Instalação
